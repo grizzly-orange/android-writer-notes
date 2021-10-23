@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragmentTitleNotesList">Notes</string>
+    <string name="fragmentTitleNotesFilter">Filter</string>
+    <string name="fragmentTitleNoteDetails">Note</string>
+</resources>
