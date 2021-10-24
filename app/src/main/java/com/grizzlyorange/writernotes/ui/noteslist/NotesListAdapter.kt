@@ -1,11 +1,15 @@
 package com.grizzlyorange.writernotes.ui.noteslist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.NotesListItemBinding
 import com.grizzlyorange.writernotes.ui.dto.Note
 
@@ -21,21 +25,22 @@ class NotesListAdapter :
     }
 
     class NoteViewHolder(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
+        private val binding: NotesListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(note: Note) {
-            val binding = NotesListItemBinding.bind(itemView)
-            binding.txtNoteNameAtListItem.text = note.name
+            binding.note = note
         }
 
         companion object {
             fun create(parent: ViewGroup): NoteViewHolder {
+
                 val binding = NotesListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false)
-                return NoteViewHolder(binding.root)
+
+                return NoteViewHolder(binding)
             }
         }
 
