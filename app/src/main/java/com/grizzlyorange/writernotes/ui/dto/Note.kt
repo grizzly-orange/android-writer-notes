@@ -1,7 +1,6 @@
 package com.grizzlyorange.writernotes.ui.dto
 
 import java.text.SimpleDateFormat
-import java.util.*
 
 data class Note(
     val name: String,
@@ -15,10 +14,6 @@ data class Note(
     private fun getDateStr(timeInMs: Long): String {
         return SimpleDateFormat
             .getDateInstance()
-            .format(
-                Calendar.getInstance().apply {
-                    timeInMillis = createDateInMs
-                }
-            )
+            .format(timeInMs)
     }
 }
