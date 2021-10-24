@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.noteslist
+package com.grizzlyorange.writernotes.ui.noteslist
 
 import android.os.Bundle
 import android.view.*

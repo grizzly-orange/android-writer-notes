@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notesfilter.NotesFilterFragment">
+    tools:context=".ui.notesfilter.NotesFilterFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

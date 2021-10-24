@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.notesfilter
+package com.grizzlyorange.writernotes.ui.notedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.grizzlyorange.writernotes.R
 
-class NotesFilterFragment : Fragment() {
+
+class NoteDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +19,6 @@ class NotesFilterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes_filter, container, false)
+        return inflater.inflate(R.layout.fragment_note_details, container, false)
     }
 }
