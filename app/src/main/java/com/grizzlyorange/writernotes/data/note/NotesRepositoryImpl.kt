@@ -9,10 +9,10 @@ class NotesRepositoryImpl @Inject constructor(
     val getAllNotesFlow get() = noteDao.getAllNotesFlow()
 
     suspend fun createOrUpdateNote(note: Note) {
-        if (note.noteId == 0L) {
-            noteDao.insert(note)
-        } else {
+        if (note.isCreated()) {
             noteDao.update(note)
+        } else {
+            noteDao.insert(note)
         }
     }
 }
