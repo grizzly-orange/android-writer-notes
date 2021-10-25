@@ -1,16 +1,13 @@
 package com.grizzlyorange.writernotes.ui.dto
 
+import com.grizzlyorange.writernotes.data.note.Note
 import java.text.SimpleDateFormat
 
-data class Note(
-    val noteId: Long = 0,
-    val name: String = "",
-    val text: String = "",
-    private val createDateInMs: Long = 0,
-    private val updateDateInMs: Long = 0
-) {
-    val createDate: String get() = getDateStr(createDateInMs)
-    val updateDate: String get() = getDateStr(updateDateInMs)
+data class Note(val note: Note) {
+    val name: String get() = note.name
+    val text: String get() = note.text
+    val createDate: String get() = getDateStr(note.createDateInMillis)
+    val updateDate: String get() = getDateStr(note.updateDateInMillis)
 
     private fun getDateStr(timeInMs: Long): String {
         return SimpleDateFormat
