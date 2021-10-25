@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.notedetails
+package com.grizzlyorange.writernotes.ui.screens.notedetails
 
 import android.os.Bundle
 import android.view.*

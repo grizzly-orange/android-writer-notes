@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.noteslist
+package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import androidx.lifecycle.*
 import com.grizzlyorange.writernotes.data.note.NotesRepositoryImpl
@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel

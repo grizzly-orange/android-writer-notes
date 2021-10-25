@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.noteslist
+package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import android.os.Bundle
 import android.view.*
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.data.note.Note
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
-import com.grizzlyorange.writernotes.ui.notedetails.NoteDetailsViewModel
+import com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

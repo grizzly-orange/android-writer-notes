@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.notesfilter
+package com.grizzlyorange.writernotes.ui.screens.notesfilter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -7,14 +7,14 @@
     <data>
         <variable
             name="noteDetailsVM"
-            type="com.grizzlyorange.writernotes.ui.notedetails.NoteDetailsViewModel" />
+            type="com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.notedetails.NoteDetailsFragment" >
+        tools:context=".ui.screens.notedetails.NoteDetailsFragment" >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNoteNameAtNoteDetails"

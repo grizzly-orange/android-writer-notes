@@ -1,6 +1,5 @@
-package com.grizzlyorange.writernotes.ui.notedetails
+package com.grizzlyorange.writernotes.ui.screens.notedetails
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

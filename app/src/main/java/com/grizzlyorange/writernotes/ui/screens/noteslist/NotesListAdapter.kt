@@ -1,15 +1,10 @@
-package com.grizzlyorange.writernotes.ui.noteslist
+package com.grizzlyorange.writernotes.ui.screens.noteslist
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.NotesListItemBinding
 import com.grizzlyorange.writernotes.ui.dto.Note
 
