@@ -3,4 +3,6 @@
     <!-- Note details screen -->
     <string name="txtNoteNameHintAtNoteDetails">Note name</string>
     <string name="txtNoteNamePlaceholderAtNoteDetails">My awesome note</string>
+    <string name="txtNoteTextHintAtNoteDetails">Note text</string>
+    <string name="txtNoteTextPlaceholderAtNoteDetails">Once upon a time…</string>
 </resources>

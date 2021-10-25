@@ -38,6 +38,9 @@
             android:id="@+id/inputNoteTextAtNoteDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/txtNoteTextHintAtNoteDetails"
+            app:expandedHintEnabled="false"
+            app:placeholderText="@string/txtNoteTextPlaceholderAtNoteDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inputNoteNameAtNoteDetails">
@@ -45,7 +48,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:text="@={noteDetailsVM.noteText}" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
