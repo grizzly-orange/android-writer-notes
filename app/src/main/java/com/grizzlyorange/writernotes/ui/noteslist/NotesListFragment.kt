@@ -8,8 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NotesListFragment : Fragment() {
 
     private var _binding: FragmentNotesListBinding? = null
