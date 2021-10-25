@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grizzlyorange.writernotes.data.note.Note
 import com.grizzlyorange.writernotes.data.note.NotesRepositoryImpl
+import com.grizzlyorange.writernotes.ui.data.errors.Errors
+import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteDetailsViewModel @Inject constructor(
-    private val notesRep: NotesRepositoryImpl
+    private val notesRep: NotesRepositoryImpl,
+    private val errorsStorage: ErrorsStorage
 ) : ViewModel() {
 
     private val _note: MutableLiveData<Note> = MutableLiveData()
@@ -46,18 +49,33 @@ class NoteDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun updateCurrentNoteValue(note: Note) {
-        _note.value = note
-    }
-
     fun saveCurrentNote(): Boolean {
         val note = _note.value ?: return false
 
-        // TODO: check errors
         note.refreshDateTime(Calendar.getInstance().timeInMillis)
+
+        checkAndUpdateErrors(note)
+        if (errorsStorage.hasErrors())
+            return false
+
         viewModelScope.launch(Dispatchers.IO) {
             notesRep.createOrUpdateNote(note)
         }
         return true
+    }
+
+    private fun checkAndUpdateErrors(note: Note) {
+        if (note.name.isEmpty() && note.text.isEmpty()) {
+            errorsStorage.addError(
+                Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
+        } else {
+            errorsStorage.removeError(
+                Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
+        }
+    }
+
+    private fun updateCurrentNoteValue(note: Note) {
+        checkAndUpdateErrors(note)
+        _note.value = note
     }
 }
