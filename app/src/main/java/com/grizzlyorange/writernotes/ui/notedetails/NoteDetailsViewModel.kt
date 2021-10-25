@@ -1,6 +1,6 @@
 package com.grizzlyorange.writernotes.ui.notedetails
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +9,7 @@ import com.grizzlyorange.writernotes.data.note.NotesRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,8 +54,8 @@ class NoteDetailsViewModel @Inject constructor(
     fun saveCurrentNote(): Boolean {
         val note = _note.value ?: return false
 
-        // TODO: set update create date
         // TODO: check errors
+        note.refreshDateTime(Calendar.getInstance().timeInMillis)
         viewModelScope.launch(Dispatchers.IO) {
             notesRep.createOrUpdateNote(note)
         }
