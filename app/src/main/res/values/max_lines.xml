@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="note_name_max_lines_at_description">2</integer>
+    <integer name="note_text_max_lines_at_description">10</integer>
+    <integer name="note_name_max_lines_at_list">2</integer>
+    <integer name="note_text_max_lines_at_list">5</integer>
+</resources>

@@ -20,6 +20,8 @@
             android:id="@+id/errorsViewAtNoteDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
             app:errorsStorage="@{noteDetailsVM.errorsStorage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,36 +31,45 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNoteNameAtNoteDetails"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
             android:hint="@string/txtNoteNameHintAtNoteDetails"
             app:expandedHintEnabled="false"
-            app:placeholderText="@string/txtNoteNamePlaceholderAtNoteDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/errorsViewAtNoteDetails">
+            app:layout_constraintTop_toBottomOf="@id/errorsViewAtNoteDetails"
+            app:placeholderText="@string/txtNoteNamePlaceholderAtNoteDetails">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={noteDetailsVM.noteName}"
-                />
+                android:maxLines="@integer/note_name_max_lines_at_description"
+                android:text="@={noteDetailsVM.noteName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNoteTextAtNoteDetails"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
             android:hint="@string/txtNoteTextHintAtNoteDetails"
             app:expandedHintEnabled="false"
-            app:placeholderText="@string/txtNoteTextPlaceholderAtNoteDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputNoteNameAtNoteDetails">
+            app:layout_constraintTop_toBottomOf="@id/inputNoteNameAtNoteDetails"
+            app:placeholderText="@string/txtNoteTextPlaceholderAtNoteDetails">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="@integer/note_text_max_lines_at_description"
                 android:text="@={noteDetailsVM.noteText}" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
