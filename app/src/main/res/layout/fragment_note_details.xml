@@ -16,6 +16,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.screens.notedetails.NoteDetailsFragment" >
 
+        <com.grizzlyorange.writernotes.ui.views.errors.ErrorsView
+            android:id="@+id/errorsViewAtNoteDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorsStorage="@{noteDetailsVM.errorsStorage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.grizzlyorange.writernotes.ui.views.errors.ErrorsView>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNoteNameAtNoteDetails"
             android:layout_width="match_parent"
@@ -25,7 +36,7 @@
             app:placeholderText="@string/txtNoteNamePlaceholderAtNoteDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/errorsViewAtNoteDetails">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

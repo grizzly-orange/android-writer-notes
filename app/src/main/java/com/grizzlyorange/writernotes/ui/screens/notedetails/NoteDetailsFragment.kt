@@ -29,15 +29,13 @@ class NoteDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
-
+        binding.noteDetailsVM = noteDetailsVM
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.noteDetailsVM = noteDetailsVM
-        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

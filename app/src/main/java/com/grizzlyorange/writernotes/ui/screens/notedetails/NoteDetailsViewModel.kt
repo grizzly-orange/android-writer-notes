@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteDetailsViewModel @Inject constructor(
     private val notesRep: NotesRepositoryImpl,
-    private val errorsStorage: ErrorsStorage
+    val errorsStorage: ErrorsStorage
 ) : ViewModel() {
 
     private val _note: MutableLiveData<Note> = MutableLiveData()
@@ -54,7 +54,7 @@ class NoteDetailsViewModel @Inject constructor(
 
         note.refreshDateTime(Calendar.getInstance().timeInMillis)
 
-        checkAndUpdateErrors(note)
+        checkAndSetupErrors(note)
         if (errorsStorage.hasErrors())
             return false
 
@@ -64,18 +64,22 @@ class NoteDetailsViewModel @Inject constructor(
         return true
     }
 
-    private fun checkAndUpdateErrors(note: Note) {
+    private fun checkAndSetupErrors(note: Note) {
         if (note.name.isEmpty() && note.text.isEmpty()) {
             errorsStorage.addError(
                 Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
-        } else {
+        }
+    }
+
+    private fun checkAndRemoveErrors(note: Note) {
+        if (note.name.isNotEmpty() || note.text.isNotEmpty()) {
             errorsStorage.removeError(
                 Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
         }
     }
 
     private fun updateCurrentNoteValue(note: Note) {
-        checkAndUpdateErrors(note)
+        checkAndRemoveErrors(note)
         _note.value = note
     }
 }
