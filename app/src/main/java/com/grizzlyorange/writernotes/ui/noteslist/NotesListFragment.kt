@@ -3,11 +3,14 @@ package com.grizzlyorange.writernotes.ui.noteslist
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grizzlyorange.writernotes.R
+import com.grizzlyorange.writernotes.data.note.Note
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
+import com.grizzlyorange.writernotes.ui.notedetails.NoteDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +19,8 @@ class NotesListFragment : Fragment() {
     private var _binding: FragmentNotesListBinding? = null
     private val binding get() = _binding!!
 
-    private val noteVM: NotesListViewModel by viewModels()
+    private val notesVM: NotesListViewModel by viewModels()
+    private val noteDetailsVM: NoteDetailsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +44,12 @@ class NotesListFragment : Fragment() {
         binding.rvNotesList.adapter = adapter
         binding.rvNotesList.layoutManager = LinearLayoutManager(requireContext())
 
-        noteVM.notes.observe(viewLifecycleOwner, {
+        notesVM.notes.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
 
         binding.fabAddNote.setOnClickListener {
-            moveToDetails()
+            moveToDetails(null)
         }
     }
 
@@ -68,7 +72,8 @@ class NotesListFragment : Fragment() {
             R.id.action_notesListFragment_to_notesFilterFragment)
     }
 
-    private fun moveToDetails() {
+    private fun moveToDetails(note: Note?) {
+        noteDetailsVM.setCurrentNote(null)
         findNavController().navigate(
             R.id.action_notesListFragment_to_noteDetailsFragment)
     }

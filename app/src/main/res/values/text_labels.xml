@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Note details screen -->
+    <string name="txtNoteNameHintAtNoteDetails">Note name</string>
+    <string name="txtNoteNamePlaceholderAtNoteDetails">My awesome note</string>
+</resources>

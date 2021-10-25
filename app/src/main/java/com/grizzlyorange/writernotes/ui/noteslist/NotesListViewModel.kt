@@ -22,7 +22,7 @@ class NotesListViewModel @Inject constructor(
             notesRep.getAllNotesFlow.collect { notes ->
                 _notes.postValue(
                     notes.map { note ->
-                        Note(note.name, note.text, 0, 0)
+                        Note(note.noteId, note.name, note.text, 0, 0)
                     }
                 )
             }
