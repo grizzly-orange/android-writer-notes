@@ -7,7 +7,7 @@
     <data>
         <variable
             name="note"
-            type="com.grizzlyorange.writernotes.ui.dto.Note" />
+            type="com.grizzlyorange.writernotes.ui.data.dto.Note" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

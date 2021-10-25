@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.grizzlyorange.writernotes.databinding.NotesListItemBinding
-import com.grizzlyorange.writernotes.ui.dto.Note
+import com.grizzlyorange.writernotes.ui.data.dto.Note
 
 class NotesListAdapter :
     ListAdapter<Note,NotesListAdapter.NoteViewHolder>(NoteViewHolder.NoteComparator()) {

@@ -2,7 +2,7 @@ package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import androidx.lifecycle.*
 import com.grizzlyorange.writernotes.data.note.NotesRepositoryImpl
-import com.grizzlyorange.writernotes.ui.dto.Note
+import com.grizzlyorange.writernotes.ui.data.dto.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

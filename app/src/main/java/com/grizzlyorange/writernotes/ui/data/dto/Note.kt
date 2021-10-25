@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.dto
+package com.grizzlyorange.writernotes.ui.data.dto
 
 import com.grizzlyorange.writernotes.data.note.Note
 import java.text.SimpleDateFormat
