@@ -9,7 +9,7 @@
         <import type="android.view.View" />
         <variable
             name="note"
-            type="com.grizzlyorange.writernotes.ui.data.dto.Note" />
+            type="com.grizzlyorange.writernotes.ui.data.dto.NoteDTOUI" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

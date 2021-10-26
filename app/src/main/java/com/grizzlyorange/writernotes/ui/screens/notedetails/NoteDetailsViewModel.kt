@@ -47,6 +47,7 @@ class NoteDetailsViewModel @Inject constructor(
         } else {
             updateCurrentNoteValue(note)
         }
+        errorsStorage.resetErrors()
     }
 
     fun saveCurrentNote(): Boolean {
