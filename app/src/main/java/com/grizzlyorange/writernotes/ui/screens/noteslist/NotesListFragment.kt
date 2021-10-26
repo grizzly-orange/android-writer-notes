@@ -179,13 +179,13 @@ class NotesListFragment :
 
     private fun deleteSelectedItems() {
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage("Delete")
+            .setMessage(R.string.deleteNotesDialogMessage)
             .setNegativeButton(
-                "Cancel", null)
+                R.string.deleteNotesDialogNegativeButtonLabel, null)
             .setPositiveButton(
-                "Delete",
+                R.string.deleteNotesDialogPositiveButtonLabel,
                 DialogInterface.OnClickListener { dialog, which ->
-                    //TODO: delete
+                    notesVM.deleteNotes(notesVM.listSelectionManager.getSelectedItems())
                     turnOffActionMode()
                 })
             .show()

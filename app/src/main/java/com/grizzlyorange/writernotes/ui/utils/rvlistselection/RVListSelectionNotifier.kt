@@ -15,7 +15,6 @@ class RVListSelectionNotifier<T> @Inject constructor(
     var isActionMode: Boolean?
         get() = _isActionMode.value
         set(value) {
-            Log.d("*** NoteSelectionVM", "set isActionMode ${value}")
             val oldValue = _isActionMode.value
             if (value != oldValue) {
                 _isActionMode.value = value
@@ -33,6 +32,10 @@ class RVListSelectionNotifier<T> @Inject constructor(
     fun toggleItemSelection(item: T, position: Int) {
         listSelection.toggleSelection(item, position)
         updateSelectedItemsCount()
+    }
+
+    fun getSelectedItems(): Set<T> {
+        return listSelection.getSelection()
     }
 
     private fun updateSelectedItemsCount() {

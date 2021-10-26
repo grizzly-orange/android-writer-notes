@@ -1,9 +1,6 @@
 package com.grizzlyorange.writernotes.data.note
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,4 +14,7 @@ interface NoteDao {
 
     @Update
     suspend fun update(note: Note)
+
+    @Delete
+    suspend fun delete(notes: List<Note>)
 }

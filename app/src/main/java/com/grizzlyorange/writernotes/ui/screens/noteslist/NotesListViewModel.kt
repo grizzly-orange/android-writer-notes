@@ -24,9 +24,14 @@ class NotesListViewModel @Inject constructor(
                 _notes.postValue(
                     notes.map { note ->
                         NoteDTOUI(note)
-                    }
-                )
+                    })
             }
+        }
+    }
+
+    fun deleteNotes(notes: Set<NoteDTOUI>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            notesRep.deleteNotes(notes.map { it.note })
         }
     }
 }

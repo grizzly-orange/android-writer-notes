@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- delete note dialog -->
+    <string name="deleteNotesDialogMessage">All selected notes will be deleted</string>
+    <string name="deleteNotesDialogNegativeButtonLabel">Cancel</string>
+    <string name="deleteNotesDialogPositiveButtonLabel">Delete</string>
+</resources>

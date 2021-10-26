@@ -15,4 +15,8 @@ class NotesRepositoryImpl @Inject constructor(
             noteDao.insert(note)
         }
     }
+
+    suspend fun deleteNotes(notes: List<Note>) {
+        noteDao.delete(notes)
+    }
 }
