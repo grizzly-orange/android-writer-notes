@@ -9,8 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="gray">#FFaaaaaa</color>
+    <color name="light_gray">#FFdddddd</color>
     <color name="purple">#FF6200EE</color>
 
     <color name="note_item_footer_text_color">@color/gray</color>
     <color name="errors_text_color">@color/purple</color>
+    <color name="selected_note_list_item_color">@color/light_gray
+    </color>
+    <color name="regular_note_list_item_color">@color/white</color>
 </resources>

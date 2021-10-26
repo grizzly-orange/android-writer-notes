@@ -37,11 +37,7 @@ class NotesListAdapter (
 
         fun bind(note: NoteDTOUI, isSelected: Boolean) {
             binding.note = note
-            //TODO: set color on isSelected
-            if (isSelected)
-                binding.root.setBackgroundColor(Color.CYAN)
-            else
-                binding.root.setBackgroundColor(Color.WHITE)
+            binding.isSelected = isSelected
 
             binding.root.setOnClickListener {
                 clickHandler.onRVListItemClick(note, adapterPosition)
