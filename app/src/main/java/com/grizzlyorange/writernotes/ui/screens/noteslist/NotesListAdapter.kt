@@ -1,20 +1,19 @@
 package com.grizzlyorange.writernotes.ui.screens.noteslist
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.grizzlyorange.writernotes.databinding.NotesListItemBinding
-import com.grizzlyorange.writernotes.ui.data.dto.NoteDTOUI
+import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
 import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelection
 import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelectionHandler
 
 class NotesListAdapter (
-    private val selectionProcessing: RVListItemsSelection<NoteDTOUI>,
-    private val selectionHandler: RVListItemsSelectionHandler<NoteDTOUI>
-) : ListAdapter<NoteDTOUI,NotesListAdapter.NoteViewHolder>(NoteViewHolder.NoteComparator()) {
+    private val selectionProcessing: RVListItemsSelection<NoteDto>,
+    private val selectionHandler: RVListItemsSelectionHandler<NoteDto>
+) : ListAdapter<NoteDto,NotesListAdapter.NoteViewHolder>(NoteViewHolder.NoteComparator()) {
 
     init {
         selectionProcessing.setAdapter(this)
@@ -32,10 +31,10 @@ class NotesListAdapter (
 
     class NoteViewHolder(
         private val binding: NotesListItemBinding,
-        private val clickHandler: RVListItemsSelectionHandler<NoteDTOUI>
+        private val clickHandler: RVListItemsSelectionHandler<NoteDto>
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(note: NoteDTOUI, isSelected: Boolean) {
+        fun bind(note: NoteDto, isSelected: Boolean) {
             binding.note = note
             binding.isSelected = isSelected
 
@@ -49,7 +48,7 @@ class NotesListAdapter (
         }
 
         companion object {
-            fun create(parent: ViewGroup, clickHandler: RVListItemsSelectionHandler<NoteDTOUI>): NoteViewHolder {
+            fun create(parent: ViewGroup, clickHandler: RVListItemsSelectionHandler<NoteDto>): NoteViewHolder {
 
                 val binding = NotesListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -60,12 +59,12 @@ class NotesListAdapter (
             }
         }
 
-        class NoteComparator() : DiffUtil.ItemCallback<NoteDTOUI>() {
-            override fun areItemsTheSame(oldItem: NoteDTOUI, newItem: NoteDTOUI): Boolean {
+        class NoteComparator() : DiffUtil.ItemCallback<NoteDto>() {
+            override fun areItemsTheSame(oldItem: NoteDto, newItem: NoteDto): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: NoteDTOUI, newItem: NoteDTOUI): Boolean {
+            override fun areContentsTheSame(oldItem: NoteDto, newItem: NoteDto): Boolean {
                 return oldItem == newItem
             }
         }

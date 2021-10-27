@@ -2,7 +2,6 @@ package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -11,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.grizzlyorange.writernotes.R
-import com.grizzlyorange.writernotes.data.note.Note
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
-import com.grizzlyorange.writernotes.ui.data.dto.NoteDTOUI
+import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
 import com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel
 import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelectionHandler
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NotesListFragment :
     Fragment(),
-    RVListItemsSelectionHandler<NoteDTOUI>,
+    RVListItemsSelectionHandler<NoteDto>,
     ActionMode.Callback {
 
     private var _binding: FragmentNotesListBinding? = null
@@ -121,7 +120,7 @@ class NotesListFragment :
             R.id.action_notesListFragment_to_noteDetailsFragment)
     }
 
-    override fun onRVListItemClick(item: NoteDTOUI, position: Int) {
+    override fun onRVListItemClick(item: NoteDto, position: Int) {
         if (notesVM.listSelectionManager.isActionMode == true) {
             notesVM.listSelectionManager.toggleItemSelection(item, position)
         } else {
@@ -129,7 +128,7 @@ class NotesListFragment :
         }
     }
 
-    override fun onRVListItemLongClick(item: NoteDTOUI, position: Int): Boolean {
+    override fun onRVListItemLongClick(item: NoteDto, position: Int): Boolean {
         var actionModeWasTurnedOn = false
         if (notesVM.listSelectionManager.isActionMode != true) {
             actionModeWasTurnedOn = turnOnActionMode()

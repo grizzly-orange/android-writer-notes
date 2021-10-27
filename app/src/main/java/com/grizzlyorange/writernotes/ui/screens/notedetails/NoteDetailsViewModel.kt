@@ -3,8 +3,8 @@ package com.grizzlyorange.writernotes.ui.screens.notedetails
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.grizzlyorange.writernotes.data.note.Note
-import com.grizzlyorange.writernotes.data.note.NotesRepositoryImpl
+import com.grizzlyorange.writernotes.data.repositories.NotesRepositoryImpl
+import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.errors.Errors
 import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
 import dagger.hilt.android.lifecycle.HiltViewModel

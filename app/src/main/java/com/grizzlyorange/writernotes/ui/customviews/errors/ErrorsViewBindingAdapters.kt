@@ -1,7 +1,6 @@
-package com.grizzlyorange.writernotes.ui.views.errors
+package com.grizzlyorange.writernotes.ui.customviews.errors
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

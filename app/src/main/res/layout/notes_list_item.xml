@@ -9,7 +9,7 @@
         <import type="android.view.View" />
         <variable
             name="note"
-            type="com.grizzlyorange.writernotes.ui.data.dto.NoteDTOUI" />
+            type="com.grizzlyorange.writernotes.ui.data.dto.NoteDto" />
         <variable
             name="isSelected"
             type="Boolean" />

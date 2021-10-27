@@ -1,0 +1,26 @@
+package com.grizzlyorange.writernotes.domain.models
+
+class Note (
+    val noteId: Long = 0,
+    var name: String = "",
+    var text: String = "",
+    var createDateInMillis: Long = 0,
+    var updateDateInMillis: Long = 0,
+    val tags: MutableList<Tag> = mutableListOf<Tag>()
+) {
+    fun refreshDateTime(timeInMillis: Long) {
+        if (!isCreated()) {
+            createDateInMillis = timeInMillis
+        }
+        updateDateInMillis = timeInMillis
+    }
+
+    private fun isCreated(): Boolean {
+        return noteId != 0L
+    }
+
+    class Tag(
+        val id: Long,
+        val name: String
+    )
+}

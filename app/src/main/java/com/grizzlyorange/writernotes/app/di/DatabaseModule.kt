@@ -1,11 +1,9 @@
-package com.grizzlyorange.writernotes.di
+package com.grizzlyorange.writernotes.app.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.transition.Visibility
-import com.grizzlyorange.writernotes.data.WriterNotesDatabase
-import com.grizzlyorange.writernotes.data.note.NoteDao
+import com.grizzlyorange.writernotes.data.roomdb.WriterNotesDatabase
+import com.grizzlyorange.writernotes.data.roomdb.note.NoteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

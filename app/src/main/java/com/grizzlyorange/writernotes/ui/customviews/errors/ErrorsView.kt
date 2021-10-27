@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.views.errors
+package com.grizzlyorange.writernotes.ui.customviews.errors
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.grizzlyorange.writernotes.databinding.ErrorsViewBinding
 import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
-import com.grizzlyorange.writernotes.ui.views.utils.ViewsUtils
+import com.grizzlyorange.writernotes.ui.customviews.utils.ViewsUtils
 
 class ErrorsView(
     context: Context,

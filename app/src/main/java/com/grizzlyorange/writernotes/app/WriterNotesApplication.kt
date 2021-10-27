@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes
+package com.grizzlyorange.writernotes.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

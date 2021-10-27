@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.screens.notedetails.NoteDetailsFragment" >
 
-        <com.grizzlyorange.writernotes.ui.views.errors.ErrorsView
+        <com.grizzlyorange.writernotes.ui.customviews.errors.ErrorsView
             android:id="@+id/errorsViewAtNoteDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </com.grizzlyorange.writernotes.ui.views.errors.ErrorsView>
+        </com.grizzlyorange.writernotes.ui.customviews.errors.ErrorsView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNoteNameAtNoteDetails"

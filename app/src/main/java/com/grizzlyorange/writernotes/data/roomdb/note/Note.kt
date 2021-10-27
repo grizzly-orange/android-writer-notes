@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.data.note
+package com.grizzlyorange.writernotes.data.roomdb.note
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,11 +14,5 @@ data class Note(
 ) {
     fun isCreated(): Boolean {
         return noteId != 0L
-    }
-    fun refreshDateTime(timeInMillis: Long) {
-        if (!isCreated()) {
-            createDateInMillis = timeInMillis
-        }
-        updateDateInMillis = timeInMillis
     }
 }

@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.views.utils
+package com.grizzlyorange.writernotes.ui.customviews.utils
 
 import android.content.ContextWrapper
 import android.view.View
