@@ -64,7 +64,7 @@
                 android:layout_marginTop="@dimen/regular_margin"
                 android:layout_marginEnd="@dimen/regular_margin"
                 android:paddingBottom="@dimen/regular_margin"
-                android:text="@{note.createDate}"
+                android:text="@{note.updateDate}"
                 android:textColor="@color/note_item_footer_text_color"
                 android:textSize="@dimen/note_item_footer_text_size"
                 android:textStyle="italic"
