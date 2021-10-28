@@ -1,11 +1,13 @@
 package com.grizzlyorange.writernotes.ui.screens.notedetails
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grizzlyorange.writernotes.data.repositories.NotesRepositoryImpl
+import com.grizzlyorange.writernotes.domain.DomainErrors
 import com.grizzlyorange.writernotes.domain.models.Note
-import com.grizzlyorange.writernotes.ui.data.errors.Errors
+import com.grizzlyorange.writernotes.ui.data.errors.ErrorsMap
 import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteDetailsViewModel @Inject constructor(
     private val notesRep: NotesRepositoryImpl,
-    val errorsStorage: ErrorsStorage
+    val noteErrorsStorage: ErrorsStorage
 ) : ViewModel() {
 
     private val _note: MutableLiveData<Note> = MutableLiveData()
@@ -47,7 +49,7 @@ class NoteDetailsViewModel @Inject constructor(
         } else {
             updateCurrentNoteValue(note)
         }
-        errorsStorage.resetErrors()
+        noteErrorsStorage.resetErrors()
     }
 
     fun saveCurrentNote(): Boolean {
@@ -56,7 +58,7 @@ class NoteDetailsViewModel @Inject constructor(
         note.refreshDateTime(Calendar.getInstance().timeInMillis)
 
         checkAndSetupErrors(note)
-        if (errorsStorage.hasErrors())
+        if (noteErrorsStorage.hasErrors())
             return false
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -66,17 +68,15 @@ class NoteDetailsViewModel @Inject constructor(
     }
 
     private fun checkAndSetupErrors(note: Note) {
-        if (note.name.isEmpty() && note.text.isEmpty()) {
-            errorsStorage.addError(
-                Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
-        }
+        noteErrorsStorage.addErrors(
+            note.checkAndGetErrors()
+        )
     }
 
     private fun checkAndRemoveErrors(note: Note) {
-        if (note.name.isNotEmpty() || note.text.isNotEmpty()) {
-            errorsStorage.removeError(
-                Errors.ErrorType.EMPTY_NOTE_NAME_OR_TEXT)
-        }
+        noteErrorsStorage.removeAllBesides(
+            note.checkAndGetErrors()
+        )
     }
 
     private fun updateCurrentNoteValue(note: Note) {

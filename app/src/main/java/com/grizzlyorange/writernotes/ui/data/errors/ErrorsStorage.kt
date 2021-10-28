@@ -2,21 +2,23 @@ package com.grizzlyorange.writernotes.ui.data.errors
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.grizzlyorange.writernotes.domain.DomainErrors
 import javax.inject.Inject
 
 class ErrorsStorage @Inject constructor() {
-    private val _errors: MutableLiveData<Set<Errors.ErrorType>> = MutableLiveData(setOf())
-    val errors: LiveData<Set<Errors.ErrorType>> get() = _errors
+    private val _errors: MutableLiveData<Set<DomainErrors>> = MutableLiveData(setOf())
+    val errors: LiveData<Set<DomainErrors>> get() = _errors
 
-    fun removeError(error: Errors.ErrorType, isBackgoundProcess: Boolean = false) {
-        val e:MutableSet<Errors.ErrorType> = _errors.value?.toMutableSet() ?: mutableSetOf()
-        e.remove(error)
+    fun removeAllBesides(errors: Set<DomainErrors>, isBackgoundProcess: Boolean = false) {
+        val e:MutableSet<DomainErrors> = _errors.value?.toMutableSet() ?: mutableSetOf()
+        val toRemove = e.minus(errors)
+        e.removeAll(toRemove)
         setErrorsValue(e, isBackgoundProcess)
     }
 
-    fun addError(error: Errors.ErrorType, isBackgoundProcess: Boolean = false) {
-        val e:MutableSet<Errors.ErrorType> = _errors.value?.toMutableSet() ?: mutableSetOf()
-        e.add(error)
+    fun addErrors(errors: Set<DomainErrors>, isBackgoundProcess: Boolean = false) {
+        val e:MutableSet<DomainErrors> = _errors.value?.toMutableSet() ?: mutableSetOf()
+        e.addAll(errors)
         setErrorsValue(e, isBackgoundProcess)
     }
 
@@ -28,7 +30,7 @@ class ErrorsStorage @Inject constructor() {
         return (_errors.value?.isNotEmpty()) ?: false
     }
 
-    private fun setErrorsValue(errorsValue: Set<Errors.ErrorType>, isBackgoundProcess: Boolean = false) {
+    private fun setErrorsValue(errorsValue: Set<DomainErrors>, isBackgoundProcess: Boolean = false) {
         if (isBackgoundProcess) {
             _errors.postValue(errorsValue)
         } else {

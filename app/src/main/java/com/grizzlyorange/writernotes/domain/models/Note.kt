@@ -1,5 +1,7 @@
 package com.grizzlyorange.writernotes.domain.models
 
+import com.grizzlyorange.writernotes.domain.DomainErrors
+
 class Note (
     val noteId: Long = 0,
     var name: String = "",
@@ -17,6 +19,14 @@ class Note (
 
     private fun isCreated(): Boolean {
         return noteId != 0L
+    }
+
+    fun checkAndGetErrors(): Set<DomainErrors> {
+        val errors = mutableSetOf<DomainErrors>()
+        if (name.isEmpty() && text.isEmpty()) {
+            errors.add(DomainErrors.EMPTY_NOTE_NAME_OR_TEXT)
+        }
+        return errors
     }
 
     class Tag(
