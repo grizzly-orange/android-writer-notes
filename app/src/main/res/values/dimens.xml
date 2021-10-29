@@ -2,8 +2,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="regular_margin">16dp</dimen>
 
-    <dimen name="note_list_rv_margin">12dp</dimen>
-    <dimen name="note_list_item_margin">4dp</dimen>
+    <dimen name="notes_list_rv_margin">12dp</dimen>
+    <dimen name="notes_list_item_margin">4dp</dimen>
+    <dimen name="tags_list_rv_margin">12dp</dimen>
+    <dimen name="tags_list_item_margin">4dp</dimen>
 
     <dimen name="regular_text_size">16sp</dimen>
     <dimen name="note_item_header_text_size">18sp</dimen>

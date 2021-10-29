@@ -17,4 +17,7 @@ interface TagDao {
 
     @Delete
     suspend fun delete(tag: TagEntity)
+
+    @Delete
+    suspend fun delete(tags: List<TagEntity>)
 }

@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_filter_list_24"
         android:title="@string/buttonFilterNotesLabel"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/btManageTags"
+        android:icon="@drawable/ic_category_24"
+        android:title="@string/buttonManageTagsLabel"
+        app:showAsAction="never" />
 </menu>

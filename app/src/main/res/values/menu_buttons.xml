@@ -3,4 +3,5 @@
     <string name="buttonFilterNotesLabel">Filter</string>
     <string name="buttonSaveNoteLabel">Save</string>
     <string name="buttonDeleteNotesLabel">Delete</string>
+    <string name="buttonManageTagsLabel">Manage tags</string>
 </resources>

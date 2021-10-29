@@ -56,7 +56,7 @@ class NotesListFragment :
     }
 
     private fun initRVNoteList() {
-        val adapter = NotesListAdapter(notesVM.listSelectionManager.listSelection, this)
+        val adapter = NotesListAdapter(notesVM.listSelection, this)
         binding.rvNotesList.adapter = adapter
         binding.rvNotesList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -105,6 +105,10 @@ class NotesListFragment :
                      moveToFilter()
                     true
                 }
+                R.id.btManageTags -> {
+                    moveToTags()
+                    true
+                }
                 else -> super.onOptionsItemSelected(item)
             }
     }
@@ -112,6 +116,11 @@ class NotesListFragment :
     private fun moveToFilter() {
         findNavController().navigate(
             R.id.action_notesListFragment_to_notesFilterFragment)
+    }
+
+    private fun moveToTags() {
+        findNavController().navigate(
+            R.id.action_notesListFragment_to_tagsListFragment)
     }
 
     private fun moveToDetails(note: Note?) {

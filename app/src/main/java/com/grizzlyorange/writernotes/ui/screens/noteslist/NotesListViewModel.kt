@@ -16,6 +16,8 @@ class NotesListViewModel @Inject constructor(
     val listSelectionManager: RVListSelectionNotifier<NoteDto>
 ) : ViewModel() {
 
+    val listSelection get() = listSelectionManager.listSelection
+
     private val _notes: MutableLiveData<List<NoteDto>> = MutableLiveData(listOf())
     val notes: LiveData<List<NoteDto>> get() = _notes
 

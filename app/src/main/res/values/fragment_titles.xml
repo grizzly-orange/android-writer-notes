@@ -3,4 +3,5 @@
     <string name="fragmentTitleNotesList">Notes</string>
     <string name="fragmentTitleNotesFilter">Filter</string>
     <string name="fragmentTitleNoteDetails">Note</string>
+    <string name="fragmentTitleTagsList">Tags</string>
 </resources>
