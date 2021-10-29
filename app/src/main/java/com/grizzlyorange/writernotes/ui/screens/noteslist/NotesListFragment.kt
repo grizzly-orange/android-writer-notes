@@ -2,6 +2,7 @@ package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,15 +14,17 @@ import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
 import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
+import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 import com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeClient
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeManager
 import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelectionHandler
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListSelectionNotifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NotesListFragment :
-    Fragment(),
-    RVListItemsSelectionHandler<NoteDto>,
-    ActionMode.Callback {
+    Fragment() {
 
     private var _binding: FragmentNotesListBinding? = null
     private val binding get() = _binding!!
@@ -29,7 +32,7 @@ class NotesListFragment :
     private val notesVM: NotesListViewModel by viewModels()
     private val noteDetailsVM: NoteDetailsViewModel by activityViewModels()
 
-    private var actionMode: ActionMode? = null
+    private lateinit var actionModeManager: RVListActionModeManager<NoteDto>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +52,39 @@ class NotesListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initActionModeManager()
         initRVNoteList()
         initSelectionAndActionModeProcessing()
         initUIActionsListeners()
         restoreActionMode()
     }
 
+    private fun initActionModeManager() {
+        val actionModeClient = object : RVListActionModeClient<NoteDto> {
+
+            override val activityForActionMode get() = activity
+            override val listSelectionManager: RVListSelectionNotifier<NoteDto> = notesVM.listSelectionManager
+            override val menuId: Int get() = R.menu.notes_list_action_mode_menu
+
+            override fun onActionModeMenuItemClicked(menuItemId: Int): Boolean {
+                return onActionModeMenuItem(menuItemId)
+            }
+
+            override fun onClickOutsideActiveMode(item: NoteDto) {
+                moveToDetails(item.note)
+            }
+        }
+
+        actionModeManager = RVListActionModeManager<NoteDto>(actionModeClient)
+    }
+
+
+    private fun restoreActionMode() {
+        actionModeManager.restoreActionMode()
+    }
+
     private fun initRVNoteList() {
-        val adapter = NotesListAdapter(notesVM.listSelection, this)
+        val adapter = NotesListAdapter(notesVM.listSelection, actionModeManager)
         binding.rvNotesList.adapter = adapter
         binding.rvNotesList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -77,16 +105,10 @@ class NotesListFragment :
 
         notesVM.listSelectionManager.selectedItemsCount.observe(
             viewLifecycleOwner, { selectedItemsCount ->
-                updateActionModeTitle(selectedItemsCount)
+                actionModeManager.
+                    updateActionModeTitle(selectedItemsCount)
             }
         )
-    }
-
-    private fun restoreActionMode() {
-        if (notesVM.listSelectionManager.isActionMode == true &&
-            actionMode == null) {
-            turnOnActionMode()
-        }
     }
 
     private fun initUIActionsListeners() {
@@ -129,54 +151,9 @@ class NotesListFragment :
             R.id.action_notesListFragment_to_noteDetailsFragment)
     }
 
-    override fun onRVListItemClick(item: NoteDto, position: Int) {
-        if (notesVM.listSelectionManager.isActionMode == true) {
-            notesVM.listSelectionManager.toggleItemSelection(item, position)
-        } else {
-            moveToDetails(item.note)
-        }
-    }
 
-    override fun onRVListItemLongClick(item: NoteDto, position: Int): Boolean {
-        var actionModeWasTurnedOn = false
-        if (notesVM.listSelectionManager.isActionMode != true) {
-            actionModeWasTurnedOn = turnOnActionMode()
-        }
-        notesVM.listSelectionManager.toggleItemSelection(item, position)
-
-        return actionModeWasTurnedOn
-    }
-
-    private fun turnOnActionMode(): Boolean {
-        return when (actionMode) {
-            null -> {
-                actionMode = activity?.startActionMode(this)
-                true
-            }
-            else -> false
-        }
-    }
-
-    private fun turnOffActionMode() {
-        actionMode?.finish()
-    }
-
-    private fun updateActionModeTitle(selectedItemsCount: Int) {
-        actionMode?.title = selectedItemsCount.toString()
-    }
-
-    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        mode?.menuInflater?.inflate(R.menu.notes_list_action_mode_menu, menu)
-        notesVM.listSelectionManager.isActionMode = true
-        return true
-    }
-
-    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        return false
-    }
-
-    override fun onActionItemClicked(mode: ActionMode?, menuItem: MenuItem?): Boolean {
-        return when(menuItem?.itemId) {
+    fun onActionModeMenuItem(menuItemId: Int): Boolean {
+        return when(menuItemId) {
             R.id.btDeteteNotes -> {
                 deleteSelectedItems()
                 true
@@ -194,19 +171,14 @@ class NotesListFragment :
                 R.string.deleteDialogPositiveButtonLabel,
                 DialogInterface.OnClickListener { dialog, which ->
                     notesVM.deleteNotes(notesVM.listSelectionManager.getSelectedItems())
-                    turnOffActionMode()
+                    actionModeManager.turnOffActionMode()
                 })
             .show()
-    }
-
-    override fun onDestroyActionMode(mode: ActionMode?) {
-        actionMode = null
-        notesVM.listSelectionManager.isActionMode = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        actionMode = null
+        actionModeManager.destroy()
     }
 }

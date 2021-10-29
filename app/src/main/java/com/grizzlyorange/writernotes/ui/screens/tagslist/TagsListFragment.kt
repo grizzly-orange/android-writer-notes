@@ -1,7 +1,9 @@
 package com.grizzlyorange.writernotes.ui.screens.tagslist
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,20 +13,21 @@ import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentTagsListBinding
 import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelectionHandler
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeClient
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeManager
+import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListSelectionNotifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TagsListFragment :
-    Fragment(),
-    RVListItemsSelectionHandler<TagDto>,
-    ActionMode.Callback {
+    Fragment() {
 
     private var _binding: FragmentTagsListBinding? = null
     private val binding get() = _binding!!
 
     private val tagsVM: TagsListViewModel by viewModels()
-    private var actionMode: ActionMode? = null
+
+    private lateinit var actionModeManager: RVListActionModeManager<TagDto>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +40,38 @@ class TagsListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initActionModeManager()
+        restoreActionMode()
         initRVTagsList()
         initSelectionAndActionModeProcessing()
         initUIActionsListeners()
-        restoreActionMode()
+    }
+
+    private fun initActionModeManager() {
+        val actionModeClient = object : RVListActionModeClient<TagDto> {
+
+            override val activityForActionMode get() = activity
+            override val listSelectionManager: RVListSelectionNotifier<TagDto> = tagsVM.listSelectionManager
+            override val menuId: Int get() = R.menu.tags_list_action_mode_menu
+
+            override fun onActionModeMenuItemClicked(menuItemId: Int): Boolean {
+                return onActionModeMenuItem(menuItemId)
+            }
+
+            override fun onClickOutsideActiveMode(item: TagDto) {
+                moveToDetails(item.tag)
+            }
+        }
+
+        actionModeManager = RVListActionModeManager<TagDto>(actionModeClient)
+    }
+
+    private fun restoreActionMode() {
+        actionModeManager.restoreActionMode()
     }
 
     private fun initRVTagsList() {
-        val adapter = TagsListAdapter(tagsVM.listSelection, this)
+        val adapter = TagsListAdapter(tagsVM.listSelection, actionModeManager)
         binding.rvTagsList.adapter = adapter
         binding.rvTagsList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -65,16 +92,10 @@ class TagsListFragment :
 
         tagsVM.listSelectionManager.selectedItemsCount.observe(
             viewLifecycleOwner, { selectedItemsCount ->
-                updateActionModeTitle(selectedItemsCount)
+                actionModeManager
+                    .updateActionModeTitle(selectedItemsCount)
             }
         )
-    }
-
-    private fun restoreActionMode() {
-        if (tagsVM.listSelectionManager.isActionMode == true &&
-            actionMode == null) {
-            turnOnActionMode()
-        }
     }
 
     private fun initUIActionsListeners() {
@@ -87,54 +108,8 @@ class TagsListFragment :
 
     }
 
-    override fun onRVListItemClick(item: TagDto, position: Int) {
-        if (tagsVM.listSelectionManager.isActionMode == true) {
-            tagsVM.listSelectionManager.toggleItemSelection(item, position)
-        } else {
-            moveToDetails(item.tag)
-        }
-    }
-
-    override fun onRVListItemLongClick(item: TagDto, position: Int): Boolean {
-        var actionModeWasTurnedOn = false
-        if (tagsVM.listSelectionManager.isActionMode != true) {
-            actionModeWasTurnedOn = turnOnActionMode()
-        }
-        tagsVM.listSelectionManager.toggleItemSelection(item, position)
-
-        return actionModeWasTurnedOn
-    }
-
-    private fun turnOnActionMode(): Boolean {
-        return when (actionMode) {
-            null -> {
-                actionMode = activity?.startActionMode(this)
-                true
-            }
-            else -> false
-        }
-    }
-
-    private fun turnOffActionMode() {
-        actionMode?.finish()
-    }
-
-    private fun updateActionModeTitle(selectedItemsCount: Int) {
-        actionMode?.title = selectedItemsCount.toString()
-    }
-
-    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        mode?.menuInflater?.inflate(R.menu.tags_list_action_mode_menu, menu)
-        tagsVM.listSelectionManager.isActionMode = true
-        return true
-    }
-
-    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        return false
-    }
-
-    override fun onActionItemClicked(mode: ActionMode?, menuItem: MenuItem?): Boolean {
-        return when(menuItem?.itemId) {
+    fun onActionModeMenuItem(menuItemId: Int): Boolean {
+        return when(menuItemId) {
             R.id.btDeleteTags -> {
                 deleteSelectedItems()
                 true
@@ -152,19 +127,15 @@ class TagsListFragment :
                 R.string.deleteDialogPositiveButtonLabel,
                 DialogInterface.OnClickListener { dialog, which ->
                     tagsVM.deleteTags(tagsVM.listSelectionManager.getSelectedItems())
-                    turnOffActionMode()
+                    actionModeManager.turnOffActionMode()
                 })
             .show()
-    }
-
-    override fun onDestroyActionMode(p0: ActionMode?) {
-        actionMode = null
-        tagsVM.listSelectionManager.isActionMode = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        actionMode = null
+        actionModeManager.destroy()
+        // TODO: check leaks
     }
 }
