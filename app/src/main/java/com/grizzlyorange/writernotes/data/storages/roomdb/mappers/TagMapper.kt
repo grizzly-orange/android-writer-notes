@@ -1,6 +1,6 @@
-package com.grizzlyorange.writernotes.data.roomdb.mappers
+package com.grizzlyorange.writernotes.data.storages.roomdb.mappers
 
-import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
 import com.grizzlyorange.writernotes.domain.models.Note
 
 class TagMapper {

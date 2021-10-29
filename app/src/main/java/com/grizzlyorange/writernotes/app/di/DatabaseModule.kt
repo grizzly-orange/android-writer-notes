@@ -2,10 +2,10 @@ package com.grizzlyorange.writernotes.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.grizzlyorange.writernotes.data.roomdb.WriterNotesDatabase
-import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteDao
-import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NotesAndTagsCrossRefDao
-import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagDao
+import com.grizzlyorange.writernotes.data.storages.roomdb.WriterNotesDatabase
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.note.NoteDao
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags.NotesAndTagsCrossRefDao
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

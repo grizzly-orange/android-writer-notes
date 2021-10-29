@@ -1,12 +1,11 @@
 package com.grizzlyorange.writernotes.data.repositories
 
-import android.util.Log
-import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteDao
-import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
-import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NotesAndTagsCrossRef
-import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NotesAndTagsCrossRefDao
-import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
-import com.grizzlyorange.writernotes.data.roomdb.mappers.NoteMapper
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.note.NoteDao
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags.NotesAndTagsCrossRef
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags.NotesAndTagsCrossRefDao
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.mappers.NoteMapper
 import com.grizzlyorange.writernotes.domain.models.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

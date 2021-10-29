@@ -1,8 +1,7 @@
 package com.grizzlyorange.writernotes.ui.data.errors
 
 import com.grizzlyorange.writernotes.R
-import com.grizzlyorange.writernotes.domain.DomainErrors
-import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.domain.errors.DomainErrors
 
 class ErrorsMap {
     companion object {

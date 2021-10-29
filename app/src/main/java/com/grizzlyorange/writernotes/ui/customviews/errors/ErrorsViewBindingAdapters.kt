@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.grizzlyorange.writernotes.domain.DomainErrors
+import com.grizzlyorange.writernotes.domain.errors.DomainErrors
 import com.grizzlyorange.writernotes.ui.data.errors.ErrorsMap
 
 @BindingAdapter ("errors")

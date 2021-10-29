@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.ui.customviews
+package com.grizzlyorange.writernotes.ui.customviews.valuedviews
 
 import android.content.Context
 import com.google.android.material.chip.Chip

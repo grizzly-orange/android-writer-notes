@@ -1,9 +1,9 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
-import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
 
 @Entity(
     primaryKeys = ["noteId", "tagId"],

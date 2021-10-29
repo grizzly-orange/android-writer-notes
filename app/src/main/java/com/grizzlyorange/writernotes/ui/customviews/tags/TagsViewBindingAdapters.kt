@@ -1,12 +1,11 @@
 package com.grizzlyorange.writernotes.ui.customviews.tags
 
 import android.util.Log
-import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.ChipGroup
-import com.grizzlyorange.writernotes.ui.customviews.ValuedChip
+import com.grizzlyorange.writernotes.ui.customviews.valuedviews.ValuedChip
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 
 @BindingAdapter(value = ["allTags", "selectedTags", "tagsSelectionHandler", "chipStyle"], requireAll = true)

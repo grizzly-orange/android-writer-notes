@@ -1,7 +1,7 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.note
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.note
 
 import androidx.room.*
-import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NoteWithTags
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags.NoteWithTags
 import kotlinx.coroutines.flow.Flow
 
 @Dao

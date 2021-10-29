@@ -2,7 +2,7 @@ package com.grizzlyorange.writernotes.ui.data.errors
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.grizzlyorange.writernotes.domain.DomainErrors
+import com.grizzlyorange.writernotes.domain.errors.DomainErrors
 import javax.inject.Inject
 
 class ErrorsStorage @Inject constructor() {

@@ -1,10 +1,10 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags
 
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
-import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
 
 data class NoteWithTags(
     @Embedded

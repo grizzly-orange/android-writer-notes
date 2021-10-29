@@ -1,6 +1,6 @@
 package com.grizzlyorange.writernotes.domain.models
 
-import com.grizzlyorange.writernotes.domain.DomainErrors
+import com.grizzlyorange.writernotes.domain.errors.DomainErrors
 
 data class Note (
     val noteId: Long = 0,

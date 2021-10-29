@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.tag
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

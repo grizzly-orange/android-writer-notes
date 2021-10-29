@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.note
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.note
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

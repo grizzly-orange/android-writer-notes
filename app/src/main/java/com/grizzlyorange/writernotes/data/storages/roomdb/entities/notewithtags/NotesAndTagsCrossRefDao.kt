@@ -1,4 +1,4 @@
-package com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags
+package com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags
 
 import androidx.room.Dao
 import androidx.room.Delete

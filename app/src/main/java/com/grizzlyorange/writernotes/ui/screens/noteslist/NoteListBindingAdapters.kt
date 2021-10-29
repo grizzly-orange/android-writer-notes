@@ -36,5 +36,4 @@ fun setupCreateAndUpdateDate(
         R.string.txtLastUpdateDateAtNoteListItem,
         DateTimeFormatter.getDateTimeStr(lastUpdateDateInMs)
     )
-
 }
