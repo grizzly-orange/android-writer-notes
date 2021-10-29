@@ -16,4 +16,10 @@ class TagsRepositoryImpl @Inject constructor(
             TagMapper.roomToDomain(tag)
         }
     }
+
+    suspend fun deleteTags(tags: List<Note.Tag>) {
+        tagDao.delete(tags.map {
+            TagMapper.domainToRoom(it)
+        })
+    }
 }

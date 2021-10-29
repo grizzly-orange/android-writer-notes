@@ -189,9 +189,9 @@ class NotesListFragment :
         MaterialAlertDialogBuilder(requireContext())
             .setMessage(R.string.deleteNotesDialogMessage)
             .setNegativeButton(
-                R.string.deleteNotesDialogNegativeButtonLabel, null)
+                R.string.deleteDialogNegativeButtonLabel, null)
             .setPositiveButton(
-                R.string.deleteNotesDialogPositiveButtonLabel,
+                R.string.deleteDialogPositiveButtonLabel,
                 DialogInterface.OnClickListener { dialog, which ->
                     notesVM.deleteNotes(notesVM.listSelectionManager.getSelectedItems())
                     turnOffActionMode()

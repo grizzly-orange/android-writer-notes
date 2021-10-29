@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.grizzlyorange.writernotes.R
@@ -125,7 +124,7 @@ class TagsListFragment :
     }
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        mode?.menuInflater?.inflate(R.menu.notes_list_action_mode_menu, menu)
+        mode?.menuInflater?.inflate(R.menu.tags_list_action_mode_menu, menu)
         tagsVM.listSelectionManager.isActionMode = true
         return true
     }
@@ -146,11 +145,11 @@ class TagsListFragment :
 
     private fun deleteSelectedItems() {
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage(R.string.deleteNotesDialogMessage)
+            .setMessage(R.string.deleteTagsDialogMessage)
             .setNegativeButton(
-                R.string.deleteNotesDialogNegativeButtonLabel, null)
+                R.string.deleteDialogNegativeButtonLabel, null)
             .setPositiveButton(
-                R.string.deleteNotesDialogPositiveButtonLabel,
+                R.string.deleteDialogPositiveButtonLabel,
                 DialogInterface.OnClickListener { dialog, which ->
                     tagsVM.deleteTags(tagsVM.listSelectionManager.getSelectedItems())
                     turnOffActionMode()

@@ -37,7 +37,10 @@ class TagsListViewModel @Inject constructor(
     }
 
     fun deleteTags(tags: Set<TagDto>) {
-
+        viewModelScope.launch(Dispatchers.IO) {
+            tagsRep.deleteTags(tags.map {
+                it.tag
+            }.toList())
+        }
     }
-
 }

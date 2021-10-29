@@ -2,6 +2,7 @@
 <resources>
     <!-- delete note dialog -->
     <string name="deleteNotesDialogMessage">All selected notes will be deleted</string>
-    <string name="deleteNotesDialogNegativeButtonLabel">Cancel</string>
-    <string name="deleteNotesDialogPositiveButtonLabel">Delete</string>
+    <string name="deleteTagsDialogMessage">All selected tags will be deleted</string>
+    <string name="deleteDialogNegativeButtonLabel">Cancel</string>
+    <string name="deleteDialogPositiveButtonLabel">Delete</string>
 </resources>
