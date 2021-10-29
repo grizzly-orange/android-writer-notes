@@ -9,5 +9,5 @@
 
     <!-- Note list item -->
     <string name="txtTagsAtNoteListItem">Tags: %1$s</string>
-    <string name="txtLastUpdateDateAtNoteListItem">Last updated: %1$s</string>
+    <string name="txtLastUpdateDateAtNoteListItem">Last update: %1$s</string>
 </resources>
