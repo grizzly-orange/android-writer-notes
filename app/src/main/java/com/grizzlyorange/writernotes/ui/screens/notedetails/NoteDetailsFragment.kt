@@ -1,12 +1,14 @@
 package com.grizzlyorange.writernotes.ui.screens.notedetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentNoteDetailsBinding
+import com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,10 +29,14 @@ class NoteDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
         binding.noteDetailsVM = noteDetailsVM
         binding.lifecycleOwner = viewLifecycleOwner
+        // data for tags view
+        binding.tagsHeader = getString(R.string.txtTagsHeaderAtNoteDetails)
+        binding.tagsSourceAndHandler = noteDetailsVM
+
         return binding.root
     }
 

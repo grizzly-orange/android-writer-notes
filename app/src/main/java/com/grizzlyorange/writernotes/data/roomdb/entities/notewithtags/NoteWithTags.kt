@@ -1,18 +1,18 @@
-package com.grizzlyorange.writernotes.data.roomdb.notewithtags
+package com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags
 
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.grizzlyorange.writernotes.data.roomdb.note.Note
-import com.grizzlyorange.writernotes.data.roomdb.tag.Tag
+import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
 
 data class NoteWithTags(
     @Embedded
-    val note: Note,
+    val note: NoteEntity,
     @Relation(
         parentColumn = "noteId",
         entityColumn = "tagId",
         associateBy = Junction(NotesAndTagsCrossRef::class)
     )
-    val tags: List<Tag>
+    val tags: List<TagEntity>
 )

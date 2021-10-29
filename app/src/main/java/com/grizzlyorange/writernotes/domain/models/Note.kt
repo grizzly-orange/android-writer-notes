@@ -2,7 +2,7 @@ package com.grizzlyorange.writernotes.domain.models
 
 import com.grizzlyorange.writernotes.domain.DomainErrors
 
-class Note (
+data class Note (
     val noteId: Long = 0,
     var name: String = "",
     var text: String = "",
@@ -29,7 +29,7 @@ class Note (
         return errors
     }
 
-    class Tag(
+    data class Tag(
         val id: Long,
         val name: String
     )

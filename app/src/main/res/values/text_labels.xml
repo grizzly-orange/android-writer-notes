@@ -5,4 +5,5 @@
     <string name="txtNoteNamePlaceholderAtNoteDetails">My awesome note</string>
     <string name="txtNoteTextHintAtNoteDetails">Note text</string>
     <string name="txtNoteTextPlaceholderAtNoteDetails">Once upon a time…</string>
+    <string name="txtTagsHeaderAtNoteDetails">Tags:</string>
 </resources>

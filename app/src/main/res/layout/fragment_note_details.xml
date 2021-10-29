@@ -8,6 +8,15 @@
         <variable
             name="noteDetailsVM"
             type="com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel" />
+        
+        <!--data for tags view-->
+        <import type="com.grizzlyorange.writernotes.R" />
+        <variable
+            name="tagsHeader"
+            type="java.lang.String" />
+        <variable
+            name="tagsSourceAndHandler"
+            type="com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,5 +81,21 @@
                 android:maxLines="@integer/note_text_max_lines_at_description"
                 android:text="@={noteDetailsVM.noteText}" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.grizzlyorange.writernotes.ui.customviews.tags.TagsChoiceView
+            android:id="@+id/viewTagsAtNoteDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputNoteTextAtNoteDetails"
+            app:tagsViewHeader="@{tagsHeader}"
+            app:tagsSourceAndHandler="@{tagsSourceAndHandler}"
+            app:chipStyle="@{R.attr.FilterChipStyle}">
+
+        </com.grizzlyorange.writernotes.ui.customviews.tags.TagsChoiceView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

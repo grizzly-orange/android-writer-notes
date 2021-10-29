@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="tagsSourceAndHandler"
+            type="com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler" />
+        <variable
+            name="tagsViewHeader"
+            type="String" />
+        <variable
+            name="tagChipStyle"
+            type="java.lang.Integer" />
+        <variable
+            name="actionsHandler"
+            type="com.grizzlyorange.writernotes.ui.customviews.tags.TagsChoiceView" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtTagsChoiceHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/regular_text_size"
+            android:text="@{tagsViewHeader}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsGroupTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:allTags="@{tagsSourceAndHandler.allTags}"
+            app:selectedTags="@{tagsSourceAndHandler.selectedTags}"
+            app:chipStyle="@{tagChipStyle}"
+            app:tagsSelectionHandler="@{tagsSourceAndHandler}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTagsChoiceHeader">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> actionsHandler.showTagDialog()}"
+                app:srcCompat="@drawable/ic_add_24" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/txtEmptyTagsWarn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipsGroupTags" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,19 +1,19 @@
-package com.grizzlyorange.writernotes.data.roomdb.notewithtags
+package com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import com.grizzlyorange.writernotes.data.roomdb.note.Note
-import com.grizzlyorange.writernotes.data.roomdb.tag.Tag
+import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
 
 @Entity(
     primaryKeys = ["noteId", "tagId"],
     foreignKeys = [ForeignKey(
-        entity = Note::class,
+        entity = NoteEntity::class,
         parentColumns = arrayOf("noteId"),
         childColumns = arrayOf("noteId"),
         onDelete = ForeignKey.CASCADE
     ), ForeignKey(
-        entity = Tag::class,
+        entity = TagEntity::class,
         parentColumns = arrayOf("tagId"),
         childColumns = arrayOf("tagId"),
         onDelete = ForeignKey.CASCADE

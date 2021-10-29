@@ -1,15 +1,20 @@
 package com.grizzlyorange.writernotes.data.repositories
 
-import com.grizzlyorange.writernotes.data.roomdb.note.NoteDao
-import com.grizzlyorange.writernotes.data.roomdb.note.NoteMapper
-import com.grizzlyorange.writernotes.data.roomdb.notewithtags.NoteWithTags
+import android.util.Log
+import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteDao
+import com.grizzlyorange.writernotes.data.roomdb.entities.note.NoteEntity
+import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NotesAndTagsCrossRef
+import com.grizzlyorange.writernotes.data.roomdb.entities.notewithtags.NotesAndTagsCrossRefDao
+import com.grizzlyorange.writernotes.data.roomdb.entities.tag.TagEntity
+import com.grizzlyorange.writernotes.data.roomdb.mappers.NoteMapper
 import com.grizzlyorange.writernotes.domain.models.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class NotesRepositoryImpl @Inject constructor(
-    private val noteDao: NoteDao
+    private val noteDao: NoteDao,
+    private val notesAndTagsCrossRefDao: NotesAndTagsCrossRefDao
 ) {
     val getAllNotesFlow get(): Flow<List<Note>> = noteDao.getAllNotesWithTagsFlow().map { notes ->
         notes.map {
@@ -17,15 +22,39 @@ class NotesRepositoryImpl @Inject constructor(
         }
     }
 
-    suspend fun createOrUpdateNote(note: Note) {
-        val noteWithTags = NoteMapper.domainToRoom(note)
-        if (noteWithTags.note.isCreated()) {
-            noteDao.update(noteWithTags.note)
-        } else {
-            noteDao.insert(noteWithTags.note)
-        }
+    suspend fun createOrUpdateNote(noteDomain: Note) {
+        val noteWithTags = NoteMapper.domainToRoom(noteDomain)
+        val note = noteWithTags.note
 
-        //TODO: delete old cross ref and insert new cross ref
+        if (note.isCreated()) {
+            updateNote(note, noteWithTags.tags)
+        } else {
+            createNote(note, noteWithTags.tags)
+        }
+    }
+
+    private suspend fun createNote(note: NoteEntity, tags: List<TagEntity>) {
+        val noteId = noteDao.insert(note)
+
+        notesAndTagsCrossRefDao.insert(
+            tags.map {
+                NotesAndTagsCrossRef(noteId, it.tagId)
+            }
+        )
+    }
+
+    private suspend fun updateNote(note: NoteEntity, tags: List<TagEntity>) {
+        notesAndTagsCrossRefDao.delete(
+            notesAndTagsCrossRefDao.getByNoteId(note.noteId)
+        )
+
+        notesAndTagsCrossRefDao.insert(
+            tags.map {
+                NotesAndTagsCrossRef(note.noteId, it.tagId)
+            }
+        )
+
+        noteDao.update(note)
     }
 
     suspend fun deleteNotes(notes: List<Note>) {
@@ -33,6 +62,5 @@ class NotesRepositoryImpl @Inject constructor(
             NoteMapper.domainToRoom(it)
         }
         noteDao.delete(notesWithTags.map { it.note })
-        // TODO: check cascade crossref deletion
     }
 }
