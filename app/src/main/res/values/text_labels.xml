@@ -6,4 +6,8 @@
     <string name="txtNoteTextHintAtNoteDetails">Note text</string>
     <string name="txtNoteTextPlaceholderAtNoteDetails">Once upon a time…</string>
     <string name="txtTagsHeaderAtNoteDetails">Tags:</string>
+
+    <!-- Note list item -->
+    <string name="txtTagsAtNoteListItem">Tags: %1$s</string>
+    <string name="txtLastUpdateDateAtNoteListItem">Last updated: %1$s</string>
 </resources>

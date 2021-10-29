@@ -6,12 +6,15 @@ import java.text.SimpleDateFormat
 data class NoteDto(val note: Note) {
     val name: String get() = note.name
     val text: String get() = note.text
-    val createDate: String get() = getDateStr(note.createDateInMillis)
-    val updateDate: String get() = getDateStr(note.updateDateInMillis)
+    val createDate: Long get() = note.createDateInMillis
+    val updateDate: Long get() = note.updateDateInMillis
+    val tags: List<TagDto> get() = note.tags.map { TagDto(it) }
 
-    private fun getDateStr(timeInMs: Long): String {
-        return SimpleDateFormat
-            .getDateInstance()
-            .format(timeInMs)
+    val hasUpdateDate: Boolean get() = (note.updateDateInMillis != 0L)
+    val lastUpdateDate: Long get() {
+        return if (note.updateDateInMillis == 0L) {
+            note.createDateInMillis
+        } else
+            note.updateDateInMillis
+        }
     }
-}
