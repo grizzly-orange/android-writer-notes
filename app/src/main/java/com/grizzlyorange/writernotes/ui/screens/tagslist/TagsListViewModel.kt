@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TagsListViewModel @Inject constructor(
     private val tagsRep: TagsRepositoryImpl,
-    private val listSelectionManager: RVListSelectionNotifier<TagDto>
+    val listSelectionManager: RVListSelectionNotifier<TagDto>
 ) : ViewModel() {
 
     val listSelection get() = listSelectionManager.listSelection
@@ -31,10 +31,13 @@ class TagsListViewModel @Inject constructor(
                 _tags.postValue(
                     domainTags.map { tag ->
                         TagDto(tag)
-                    }
-                )
+                    })
             }
         }
+    }
+
+    fun deleteTags(tags: Set<TagDto>) {
+
     }
 
 }

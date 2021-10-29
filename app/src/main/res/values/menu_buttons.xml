@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="buttonFilterNotesLabel">Filter</string>
-    <string name="buttonSaveNoteLabel">Save</string>
-    <string name="buttonDeleteNotesLabel">Delete</string>
-    <string name="buttonManageTagsLabel">Manage tags</string>
+    <string name="buttonFilterNotes">Filter</string>
+    <string name="buttonSaveNote">Save</string>
+    <string name="buttonDeleteNotes">Delete</string>
+    <string name="buttonManageTags">Manage tags</string>
+    <string name="buttonDeleteTags">Delete</string>
 </resources>

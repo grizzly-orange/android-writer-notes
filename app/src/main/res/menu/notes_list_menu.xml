@@ -5,11 +5,11 @@
     <item
         android:id="@+id/btFilterNotes"
         android:icon="@drawable/ic_filter_list_24"
-        android:title="@string/buttonFilterNotesLabel"
+        android:title="@string/buttonFilterNotes"
         app:showAsAction="always" />
     <item
         android:id="@+id/btManageTags"
         android:icon="@drawable/ic_category_24"
-        android:title="@string/buttonManageTagsLabel"
+        android:title="@string/buttonManageTags"
         app:showAsAction="never" />
 </menu>
