@@ -1,10 +1,8 @@
-package com.grizzlyorange.writernotes.ui.utils.rvlistselection
+package com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection
 
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
-import com.grizzlyorange.writernotes.R
-import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 
 class RVListActionModeManager<T>(
     private val client: RVListActionModeClient<T>
@@ -18,7 +16,7 @@ class RVListActionModeManager<T>(
         if (listSelectionManager.isActionMode == true) {
             listSelectionManager.toggleItemSelection(item, position)
         } else {
-            client.onClickOutsideActiveMode(item)
+            client.onClickListItemOutsideOfActiveMode(item)
         }
     }
 

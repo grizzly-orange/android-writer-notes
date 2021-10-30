@@ -1,12 +1,11 @@
-package com.grizzlyorange.writernotes.ui.utils.rvlistselection
+package com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 
-class RVListSelectionNotifier<T> @Inject constructor(
-    val listSelection: RVListItemsSelection<T>
+class RVListItemsSelectionManager<T> @Inject constructor(
+    val listSelection: RVListItemsSelectionState<T>
 ) {
 
     private val _isActionMode: MutableLiveData<Boolean?> = MutableLiveData(null)

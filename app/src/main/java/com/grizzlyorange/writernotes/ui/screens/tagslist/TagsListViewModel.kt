@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grizzlyorange.writernotes.data.repositories.TagsRepositoryImpl
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListSelectionNotifier
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TagsListViewModel @Inject constructor(
     private val tagsRep: TagsRepositoryImpl,
-    val listSelectionManager: RVListSelectionNotifier<TagDto>
+    val listSelectionManager: RVListItemsSelectionManager<TagDto>
 ) : ViewModel() {
 
     val listSelection get() = listSelectionManager.listSelection

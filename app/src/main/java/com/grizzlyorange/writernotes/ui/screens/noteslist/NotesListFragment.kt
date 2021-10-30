@@ -1,8 +1,8 @@
 package com.grizzlyorange.writernotes.ui.screens.noteslist
 
+import RVListAdapter
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,10 +16,9 @@ import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 import com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeClient
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeManager
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListItemsSelectionHandler
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListSelectionNotifier
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeClient
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeManager
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,14 +62,14 @@ class NotesListFragment :
         val actionModeClient = object : RVListActionModeClient<NoteDto> {
 
             override val activityForActionMode get() = activity
-            override val listSelectionManager: RVListSelectionNotifier<NoteDto> = notesVM.listSelectionManager
+            override val listSelectionManager: RVListItemsSelectionManager<NoteDto> = notesVM.listSelectionManager
             override val menuId: Int get() = R.menu.notes_list_action_mode_menu
 
             override fun onActionModeMenuItemClicked(menuItemId: Int): Boolean {
                 return onActionModeMenuItem(menuItemId)
             }
 
-            override fun onClickOutsideActiveMode(item: NoteDto) {
+            override fun onClickListItemOutsideOfActiveMode(item: NoteDto) {
                 moveToDetails(item.note)
             }
         }
@@ -84,7 +83,10 @@ class NotesListFragment :
     }
 
     private fun initRVNoteList() {
-        val adapter = NotesListAdapter(notesVM.listSelection, actionModeManager)
+        val adapter = RVListAdapter<NoteDto>(
+            R.layout.notes_list_item,
+            notesVM.listSelection,
+            actionModeManager)
         binding.rvNotesList.adapter = adapter
         binding.rvNotesList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -168,11 +170,11 @@ class NotesListFragment :
             .setNegativeButton(
                 R.string.deleteDialogNegativeButtonLabel, null)
             .setPositiveButton(
-                R.string.deleteDialogPositiveButtonLabel,
-                DialogInterface.OnClickListener { dialog, which ->
-                    notesVM.deleteNotes(notesVM.listSelectionManager.getSelectedItems())
-                    actionModeManager.turnOffActionMode()
-                })
+                R.string.deleteDialogPositiveButtonLabel
+            ) { _, _ ->
+                notesVM.deleteNotes(notesVM.listSelectionManager.getSelectedItems())
+                actionModeManager.turnOffActionMode()
+            }
             .show()
     }
 

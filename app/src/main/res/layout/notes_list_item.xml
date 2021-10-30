@@ -8,7 +8,7 @@
 
         <import type="android.view.View" />
         <variable
-            name="note"
+            name="item"
             type="com.grizzlyorange.writernotes.ui.data.dto.NoteDto" />
         <variable
             name="isSelected"
@@ -33,10 +33,10 @@
                 android:layout_marginTop="@dimen/regular_margin"
                 android:layout_marginEnd="@dimen/regular_margin"
                 android:maxLines="@integer/note_name_max_lines_at_list"
-                android:text="@{note.name}"
+                android:text="@{item.name}"
                 android:textSize="@dimen/note_item_header_text_size"
                 android:textStyle="bold"
-                android:visibility="@{note.name.empty ? View.GONE : View.VISIBLE}"
+                android:visibility="@{item.name.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,9 +49,9 @@
                 android:layout_marginTop="@dimen/regular_margin"
                 android:layout_marginEnd="@dimen/regular_margin"
                 android:maxLines="@integer/note_text_max_lines_at_list"
-                android:text="@{note.text}"
+                android:text="@{item.text}"
                 android:textSize="@dimen/regular_text_size"
-                android:visibility="@{note.text.empty ? View.GONE : View.VISIBLE}"
+                android:visibility="@{item.text.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtNoteNameAtListItem" />
@@ -67,7 +67,7 @@
                 android:textColor="@color/note_item_footer_text_color"
                 android:textSize="@dimen/note_item_footer_text_size"
                 android:textStyle="italic"
-                app:lastUpdateDateInMs="@{note.lastUpdateDate}"
+                app:lastUpdateDateInMs="@{item.lastUpdateDate}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtNoteTextAtListItem" />
@@ -85,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtNoteCreateAndUpdatedDateAtListItem"
-                app:tags="@{note.tags}" />
+                app:tags="@{item.tags}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

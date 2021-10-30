@@ -1,9 +1,8 @@
 package com.grizzlyorange.writernotes.ui.screens.tagslist
 
-import android.app.Activity
+import RVListAdapter
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,9 +12,9 @@ import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentTagsListBinding
 import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeClient
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListActionModeManager
-import com.grizzlyorange.writernotes.ui.utils.rvlistselection.RVListSelectionNotifier
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeClient
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeManager
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,14 +50,14 @@ class TagsListFragment :
         val actionModeClient = object : RVListActionModeClient<TagDto> {
 
             override val activityForActionMode get() = activity
-            override val listSelectionManager: RVListSelectionNotifier<TagDto> = tagsVM.listSelectionManager
+            override val listSelectionManager: RVListItemsSelectionManager<TagDto> = tagsVM.listSelectionManager
             override val menuId: Int get() = R.menu.tags_list_action_mode_menu
 
             override fun onActionModeMenuItemClicked(menuItemId: Int): Boolean {
                 return onActionModeMenuItem(menuItemId)
             }
 
-            override fun onClickOutsideActiveMode(item: TagDto) {
+            override fun onClickListItemOutsideOfActiveMode(item: TagDto) {
                 moveToDetails(item.tag)
             }
         }
@@ -71,7 +70,10 @@ class TagsListFragment :
     }
 
     private fun initRVTagsList() {
-        val adapter = TagsListAdapter(tagsVM.listSelection, actionModeManager)
+        val adapter = RVListAdapter<TagDto>(
+            R.layout.tag_list_item,
+            tagsVM.listSelection,
+            actionModeManager)
         binding.rvTagsList.adapter = adapter
         binding.rvTagsList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -124,11 +126,11 @@ class TagsListFragment :
             .setNegativeButton(
                 R.string.deleteDialogNegativeButtonLabel, null)
             .setPositiveButton(
-                R.string.deleteDialogPositiveButtonLabel,
-                DialogInterface.OnClickListener { dialog, which ->
-                    tagsVM.deleteTags(tagsVM.listSelectionManager.getSelectedItems())
-                    actionModeManager.turnOffActionMode()
-                })
+                R.string.deleteDialogPositiveButtonLabel
+            ) { _, _ ->
+                tagsVM.deleteTags(tagsVM.listSelectionManager.getSelectedItems())
+                actionModeManager.turnOffActionMode()
+            }
             .show()
     }
 

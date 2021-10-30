@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="tag"
+            name="item"
             type="com.grizzlyorange.writernotes.ui.data.dto.TagDto" />
         <variable
             name="isSelected"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/regular_margin"
                 android:padding="@dimen/regular_margin"
-                android:text="@{tag.name}"
+                android:text="@{item.name}"
                 android:textSize="@dimen/regular_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

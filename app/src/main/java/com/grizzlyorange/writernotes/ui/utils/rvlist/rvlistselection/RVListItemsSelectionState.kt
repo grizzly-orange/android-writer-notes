@@ -1,9 +1,9 @@
-package com.grizzlyorange.writernotes.ui.utils.rvlistselection
+package com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection
 
 import androidx.recyclerview.widget.RecyclerView
 import javax.inject.Inject
 
-class RVListItemsSelection<T> @Inject constructor() {
+class RVListItemsSelectionState<T> @Inject constructor() {
     private lateinit var listAdapter: RecyclerView.Adapter<*>
     private val selectedItems: MutableSet<T> = mutableSetOf()
 
