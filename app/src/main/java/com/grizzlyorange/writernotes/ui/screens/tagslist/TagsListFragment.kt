@@ -1,7 +1,6 @@
 package com.grizzlyorange.writernotes.ui.screens.tagslist
 
 import RVListAdapter
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentTagsListBinding
-import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.domain.models.Tag
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeClient
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeManager
@@ -106,7 +105,7 @@ class TagsListFragment :
         }
     }
 
-    private fun moveToDetails(tag: Note.Tag?) {
+    private fun moveToDetails(tag: Tag?) {
 
     }
 

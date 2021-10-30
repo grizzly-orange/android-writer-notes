@@ -1,16 +1,16 @@
 package com.grizzlyorange.writernotes.data.storages.roomdb.mappers
 
 import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
-import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.domain.models.Tag
 
 class TagMapper {
     companion object {
-        fun domainToRoom(tag: Note.Tag): TagEntity {
+        fun domainToRoom(tag: Tag): TagEntity {
             return TagEntity(tag.id, tag.name)
         }
 
-        fun roomToDomain(tag: TagEntity): Note.Tag {
-            return Note.Tag(tag.tagId, tag.name)
+        fun roomToDomain(tag: TagEntity): Tag {
+            return Tag(tag.tagId, tag.name)
         }
     }
 }

@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.grizzlyorange.writernotes.data.repositories.NotesRepositoryImpl
 import com.grizzlyorange.writernotes.data.repositories.TagsRepositoryImpl
 import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.domain.models.Tag
 import com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler
-import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,7 +64,7 @@ class NoteDetailsViewModel @Inject constructor(
         }
     }
 
-    override fun onTagSelected(tag: Note.Tag, isChecked: Boolean) {
+    override fun onTagSelected(tag: Tag, isChecked: Boolean) {
         Log.d("***", "onTagSelect ${tag} ${isChecked}")
         Log.d("***", "onTagSelect before ${_note.value?.tags} ")
 

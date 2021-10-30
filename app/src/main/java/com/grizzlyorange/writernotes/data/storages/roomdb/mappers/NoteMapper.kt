@@ -3,6 +3,7 @@ package com.grizzlyorange.writernotes.data.storages.roomdb.mappers
 import com.grizzlyorange.writernotes.data.storages.roomdb.entities.notewithtags.NoteWithTags
 import com.grizzlyorange.writernotes.data.storages.roomdb.entities.tag.TagEntity
 import com.grizzlyorange.writernotes.domain.models.Note
+import com.grizzlyorange.writernotes.domain.models.Tag
 
 class NoteMapper {
     companion object {
@@ -23,7 +24,7 @@ class NoteMapper {
         }
 
         fun roomToDomain(noteWithTags: NoteWithTags): Note {
-            val tags = mutableListOf<Note.Tag>().apply {
+            val tags = mutableListOf<Tag>().apply {
                 noteWithTags.tags.forEach {
                     add(TagMapper.roomToDomain(it))
                 }

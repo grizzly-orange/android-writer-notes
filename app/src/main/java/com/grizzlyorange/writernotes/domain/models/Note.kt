@@ -29,8 +29,4 @@ data class Note (
         return errors
     }
 
-    data class Tag(
-        val id: Long,
-        val name: String
-    )
 }
