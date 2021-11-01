@@ -4,13 +4,17 @@ import RVListAdapter
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentTagsListBinding
 import com.grizzlyorange.writernotes.domain.models.Tag
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
+import com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsDialogFragment
+import com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsViewModel
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeClient
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeManager
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
@@ -24,6 +28,7 @@ class TagsListFragment :
     private val binding get() = _binding!!
 
     private val tagsVM: TagsListViewModel by viewModels()
+    private val tagDetailsVM: TagDetailsViewModel by activityViewModels()
 
     private lateinit var actionModeManager: RVListActionModeManager<TagDto>
 
@@ -106,7 +111,9 @@ class TagsListFragment :
     }
 
     private fun moveToDetails(tag: Tag?) {
-
+        tagDetailsVM.setCurrentTag(tag)
+        TagDetailsDialogFragment()
+            .show(childFragmentManager, "tagDetailsDialogFragment")
     }
 
     fun onActionModeMenuItem(menuItemId: Int): Boolean {

@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.grizzlyorange.writernotes.data.repositories.NotesRepositoryImpl
-import com.grizzlyorange.writernotes.data.repositories.TagsRepositoryImpl
+import com.grizzlyorange.writernotes.data.repositories.NotesRepository
+import com.grizzlyorange.writernotes.data.repositories.TagsRepository
 import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.domain.models.Tag
 import com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler
@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteDetailsViewModel @Inject constructor(
-    private val notesRep: NotesRepositoryImpl,
-    private val tagsRep: TagsRepositoryImpl,
+    private val notesRep: NotesRepository,
+    private val tagsRep: TagsRepository,
     val noteErrorsStorage: ErrorsStorage
 ) : ViewModel(), TagsSourceAndHandler {
 
@@ -65,20 +65,17 @@ class NoteDetailsViewModel @Inject constructor(
     }
 
     override fun onTagSelected(tag: Tag, isChecked: Boolean) {
-        Log.d("***", "onTagSelect ${tag} ${isChecked}")
-        Log.d("***", "onTagSelect before ${_note.value?.tags} ")
 
         val n = _note.value ?: return
-        val tagsIds = n.tags.map { it.id }
-        Log.d("***", "onTagSelect contains ${tagsIds.contains(tag.id)} ")
-        if (tagsIds.contains(tag.id) && !isChecked) {
+        val tagsIds = n.tags.map { it.tagId }
+
+        if (tagsIds.contains(tag.tagId) && !isChecked) {
             n.tags.remove(tag)
             updateCurrentNoteValue(n)
-        } else if (!tagsIds.contains(tag.id) && isChecked) {
+        } else if (!tagsIds.contains(tag.tagId) && isChecked) {
             n.tags.add(tag)
             updateCurrentNoteValue(n)
         }
-        Log.d("***", "onTagSelect after ${_note.value?.tags} ")
     }
 
     fun setCurrentNote(note: Note?) {
@@ -96,7 +93,8 @@ class NoteDetailsViewModel @Inject constructor(
 
         note.refreshDateTime(Calendar.getInstance().timeInMillis)
 
-        checkAndSetupErrors(note)
+        noteErrorsStorage.addErrors(
+            note.checkAndGetErrors())
         if (noteErrorsStorage.hasErrors())
             return false
 
@@ -106,20 +104,10 @@ class NoteDetailsViewModel @Inject constructor(
         return true
     }
 
-    private fun checkAndSetupErrors(note: Note) {
-        noteErrorsStorage.addErrors(
-            note.checkAndGetErrors()
-        )
-    }
-
-    private fun checkAndRemoveErrors(note: Note) {
-        noteErrorsStorage.removeAllBesides(
-            note.checkAndGetErrors()
-        )
-    }
-
     private fun updateCurrentNoteValue(note: Note, updateTags: Boolean = true) {
-        checkAndRemoveErrors(note)
+        noteErrorsStorage.removeAllBesides(
+            note.checkAndGetErrors())
+
         if (updateTags) {
             _selectedTags.value = note.tags.map { TagDto(it) }
         }

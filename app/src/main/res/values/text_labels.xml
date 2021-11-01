@@ -10,4 +10,8 @@
     <!-- Note list item -->
     <string name="txtTagsAtNoteListItem">Tags: %1$s</string>
     <string name="txtLastUpdateDateAtNoteListItem">Last update: %1$s</string>
+
+    <!-- Tag details screen -->
+    <string name="txtTagNameHintAtTagDetails">Tag name</string>
+    <string name="txtTagNamePlaceholderAtTagDetails">My awesome heroes</string>
 </resources>

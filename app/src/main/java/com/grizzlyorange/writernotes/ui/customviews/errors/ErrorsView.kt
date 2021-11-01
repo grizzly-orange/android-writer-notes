@@ -2,6 +2,7 @@ package com.grizzlyorange.writernotes.ui.customviews.errors
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.grizzlyorange.writernotes.databinding.ErrorsViewBinding
@@ -25,6 +26,6 @@ class ErrorsView(
     }
 
     fun setErrorsStorage(errorsStorage: ErrorsStorage) {
-        binding.errorsStorage = errorsStorage
+        binding.errorsStorage = errorsStorage ?: return
     }
 }

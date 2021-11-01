@@ -6,7 +6,7 @@ import com.grizzlyorange.writernotes.domain.models.Tag
 class TagMapper {
     companion object {
         fun domainToRoom(tag: Tag): TagEntity {
-            return TagEntity(tag.id, tag.name)
+            return TagEntity(tag.tagId, tag.name)
         }
 
         fun roomToDomain(tag: TagEntity): Tag {

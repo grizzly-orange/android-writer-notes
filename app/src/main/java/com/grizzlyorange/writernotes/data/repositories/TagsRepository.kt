@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class TagsRepositoryImpl @Inject constructor(
+class TagsRepository @Inject constructor(
     private val tagDao: TagDao
 ) {
 
@@ -21,5 +21,13 @@ class TagsRepositoryImpl @Inject constructor(
         tagDao.delete(tags.map {
             TagMapper.domainToRoom(it)
         })
+    }
+
+    suspend fun createOrUpdateTag(tag: Tag) {
+        if (tag.isCreated()) {
+            tagDao.update(TagMapper.domainToRoom(tag))
+        } else {
+            tagDao.insert(TagMapper.domainToRoom(tag))
+        }
     }
 }

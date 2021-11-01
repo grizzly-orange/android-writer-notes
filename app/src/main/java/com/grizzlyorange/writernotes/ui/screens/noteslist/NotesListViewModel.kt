@@ -1,7 +1,7 @@
 package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import androidx.lifecycle.*
-import com.grizzlyorange.writernotes.data.repositories.NotesRepositoryImpl
+import com.grizzlyorange.writernotes.data.repositories.NotesRepository
 import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
-    private val notesRep: NotesRepositoryImpl,
+    private val notesRep: NotesRepository,
     val listSelectionManager: RVListItemsSelectionManager<NoteDto>
 ) : ViewModel() {
 

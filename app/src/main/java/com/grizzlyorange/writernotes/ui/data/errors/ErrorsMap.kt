@@ -6,7 +6,10 @@ import com.grizzlyorange.writernotes.domain.errors.DomainErrors
 class ErrorsMap {
     companion object {
         val domainErrorsToMessagesId = mapOf<DomainErrors, Int>(
-            DomainErrors.EMPTY_NOTE_NAME_OR_TEXT to R.string.msgEmptyNoteNameOrText
+            DomainErrors.EMPTY_NOTE_NAME_OR_TEXT to
+                    R.string.msgEmptyNoteNameOrText,
+            DomainErrors.EMPTY_TAG_NAME to
+                    R.string.msgEmptyTagName
         )
 
     }

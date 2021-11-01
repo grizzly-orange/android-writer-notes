@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class NotesRepositoryImpl @Inject constructor(
+class NotesRepository @Inject constructor(
     private val noteDao: NoteDao,
     private val notesAndTagsCrossRefDao: NotesAndTagsCrossRefDao
 ) {

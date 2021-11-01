@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="tagDetailsVM"
+            type="com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.grizzlyorange.writernotes.ui.customviews.errors.ErrorsView
+            android:id="@+id/errorsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
+            app:errorsStorage="@{tagDetailsVM.tagsErrorsStorage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.grizzlyorange.writernotes.ui.customviews.errors.ErrorsView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtTagNameAtTagDetails"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:layout_marginRight="@dimen/regular_margin"
+            android:textSize="@dimen/regular_text_size"
+            android:hint="@string/txtTagNameHintAtTagDetails"
+            app:expandedHintEnabled="false"
+            app:placeholderText="@string/txtTagNamePlaceholderAtTagDetails"
+            app:counterEnabled="true"
+            app:counterMaxLength="@integer/tag_name_max_length"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/errorsView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="@integer/tag_name_max_length"
+                android:text="@={tagDetailsVM.tagName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

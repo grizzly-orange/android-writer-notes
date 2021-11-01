@@ -7,5 +7,5 @@ data class TagDto (
     val tag: Tag
 ) : RecyclerViewItem  {
     val name get() = tag.name
-    val id get() = tag.id
+    val id get() = tag.tagId
 }
