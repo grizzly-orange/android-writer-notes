@@ -17,6 +17,9 @@
         <variable
             name="tagsSourceAndHandler"
             type="com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler" />
+        <variable
+            name="tagDetailsVM"
+            type="com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,6 +95,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inputNoteTextAtNoteDetails"
+            app:tagDetailsViewModel="@{tagDetailsVM}"
             app:tagsViewHeader="@{tagsHeader}"
             app:tagsSourceAndHandler="@{tagsSourceAndHandler}"
             app:chipStyle="@{R.attr.FilterChipStyle}">

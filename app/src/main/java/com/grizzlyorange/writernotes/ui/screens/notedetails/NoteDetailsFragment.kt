@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentNoteDetailsBinding
 import com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler
+import com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +19,7 @@ class NoteDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val noteDetailsVM: NoteDetailsViewModel by activityViewModels()
+    private val tagDetailsVM: TagDetailsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class NoteDetailsFragment : Fragment() {
         // data for tags view
         binding.tagsHeader = getString(R.string.txtTagsHeaderAtNoteDetails)
         binding.tagsSourceAndHandler = noteDetailsVM
+        binding.tagDetailsVM = tagDetailsVM
 
         return binding.root
     }

@@ -79,7 +79,6 @@ class NoteDetailsViewModel @Inject constructor(
     }
 
     fun setCurrentNote(note: Note?) {
-        Log.d("***", "setCurrentNote ${note}")
         if (note == null) {
             updateCurrentNoteValue(Note())
         } else {
