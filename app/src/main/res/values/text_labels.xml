@@ -5,7 +5,7 @@
     <string name="txtNoteNamePlaceholderAtNoteDetails">My awesome note</string>
     <string name="txtNoteTextHintAtNoteDetails">Note text</string>
     <string name="txtNoteTextPlaceholderAtNoteDetails">Once upon a time…</string>
-    <string name="txtTagsHeaderAtNoteDetails">Tags:</string>
+    <string name="txtTagsHeaderAtNoteDetails">Select note tags from list:</string>
 
     <!-- Note list item -->
     <string name="txtTagsAtNoteListItem">Tags: %1$s</string>
@@ -14,4 +14,7 @@
     <!-- Tag details screen -->
     <string name="txtTagNameHintAtTagDetails">Tag name</string>
     <string name="txtTagNamePlaceholderAtTagDetails">My awesome heroes</string>
+
+    <!-- Tags choice view -->
+    <string name="txtEmptyTagsAtTagChoiceView">Tap + button above this text to create new tag.</string>
 </resources>

@@ -1,10 +1,13 @@
 package com.grizzlyorange.writernotes.ui.customviews.tags
 
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.ChipGroup
+import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.ui.customviews.valuedviews.ValuedChip
 import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 
@@ -61,3 +64,15 @@ fun setupSelectedTags(chipGroup: ChipGroup, selectedTags: List<TagDto>?) {
     }
 }
 
+
+@BindingAdapter("isEmptyTagsList")
+fun setupEmptyTagsWanr(textView: TextView, isEmptyTagsList: Boolean) {
+    if (isEmptyTagsList) {
+        textView.text = textView.context.getString(
+            R.string.txtEmptyTagsAtTagChoiceView)
+        textView.visibility = View.VISIBLE
+    } else {
+        textView.visibility = View.GONE
+        textView.text = ""
+    }
+}
