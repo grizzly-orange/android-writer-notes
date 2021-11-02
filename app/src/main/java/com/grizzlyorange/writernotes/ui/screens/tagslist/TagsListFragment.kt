@@ -81,9 +81,21 @@ class TagsListFragment :
         binding.rvTagsList.adapter = adapter
         binding.rvTagsList.layoutManager = LinearLayoutManager(requireContext())
 
-        tagsVM.tags.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
+        tagsVM.tags.observe(viewLifecycleOwner, { tags->
+            adapter.submitList(tags)
+            setupHeader(tags.isEmpty())
         })
+    }
+
+    private fun setupHeader(isTagsListEmpty: Boolean) {
+        val header = binding.txtHeaderAtTagsList
+        if (isTagsListEmpty) {
+            header.visibility = View.VISIBLE
+            header.text = getString(R.string.txtTagsListEmptyAtTagsList)
+        } else {
+            header.visibility = View.GONE
+            header.text = ""
+        }
     }
 
     private fun initSelectionAndActionModeProcessing() {

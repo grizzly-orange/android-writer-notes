@@ -11,6 +11,9 @@
     <string name="txtTagsAtNoteListItem">Tags: %1$s</string>
     <string name="txtLastUpdateDateAtNoteListItem">Last update: %1$s</string>
 
+    <!-- Tags list screen -->
+    <string name="txtTagsListEmptyAtTagsList">Tap + button at bottom of this screen to add new tag.</string>
+
     <!-- Tag details screen -->
     <string name="txtTagNameHintAtTagDetails">Tag name</string>
     <string name="txtTagNamePlaceholderAtTagDetails">My awesome heroes</string>
