@@ -31,11 +31,10 @@ class TagDetailsViewModel @Inject constructor(
         }
 
     fun setCurrentTag(tag: Tag?) {
-        Log.d("*** TagDetailVM", "setTag ${tag}")
         if (tag == null) {
             updateCurrentTag(Tag())
         } else {
-            updateCurrentTag(tag)
+            updateCurrentTag(tag.deepCopy())
         }
 
         tagsErrorsStorage.resetErrors()

@@ -7,6 +7,10 @@ data class Tag(
     var name: String = ""
 ) {
 
+    fun deepCopy(): Tag {
+        return Tag(tagId, name)
+    }
+
     fun isCreated(): Boolean {
         return (tagId != 0L)
     }

@@ -82,7 +82,7 @@ class NoteDetailsViewModel @Inject constructor(
         if (note == null) {
             updateCurrentNoteValue(Note())
         } else {
-            updateCurrentNoteValue(note)
+            updateCurrentNoteValue(note.deepCopy())
         }
         noteErrorsStorage.resetErrors()
     }

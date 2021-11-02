@@ -10,6 +10,17 @@ data class Note (
     var updateDateInMillis: Long = 0,
     val tags: MutableList<Tag> = mutableListOf<Tag>()
 ) {
+    fun deepCopy(): Note {
+        return Note(
+            noteId,
+            name,
+            text,
+            createDateInMillis,
+            updateDateInMillis,
+            tags.toMutableList()
+        )
+    }
+
     fun refreshDateTime(timeInMillis: Long) {
         if (!isCreated()) {
             createDateInMillis = timeInMillis
