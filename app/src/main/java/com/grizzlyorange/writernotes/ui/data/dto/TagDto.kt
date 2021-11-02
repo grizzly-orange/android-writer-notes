@@ -6,6 +6,7 @@ import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistadapter.RecyclerViewI
 data class TagDto (
     val tag: Tag
 ) : RecyclerViewItem  {
+    override var isSelected: Boolean = false
     val name get() = tag.name
     val id get() = tag.tagId
 
@@ -20,6 +21,7 @@ data class TagDto (
     override fun isContentTheSame(other: RecyclerViewItem): Boolean {
         return if (other is TagDto) {
             name == other.name
+            isSelected == other.isSelected
         } else {
             false
         }

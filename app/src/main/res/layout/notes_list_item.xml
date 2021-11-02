@@ -10,15 +10,12 @@
         <variable
             name="item"
             type="com.grizzlyorange.writernotes.ui.data.dto.NoteDto" />
-        <variable
-            name="isSelected"
-            type="Boolean" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@{isSelected ? @color/selected_list_item_color : @color/regular_list_item_color}"
+        app:cardBackgroundColor="@{item.isSelected ? @color/selected_list_item_color : @color/regular_list_item_color}"
         android:layout_margin="@dimen/notes_list_item_margin">
 
         <androidx.constraintlayout.widget.ConstraintLayout

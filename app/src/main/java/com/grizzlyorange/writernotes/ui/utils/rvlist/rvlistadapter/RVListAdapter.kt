@@ -35,8 +35,7 @@ class RVListAdapter <T: RecyclerViewItem>(
 
     override fun onBindViewHolder(holder: RVListAdapter.ItemViewHolder<T>, position: Int) {
         val item = getItem(position)
-        holder.bind(item,
-            selectionState.isSelected(item))
+        holder.bind(item)
     }
 
     class ItemViewHolder<T: RecyclerViewItem>(
@@ -44,11 +43,8 @@ class RVListAdapter <T: RecyclerViewItem>(
         private val clickHandler: RVListItemsSelectionHandler<T>
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: T, isSelected: Boolean) {
-            binding.apply {
-                setVariable(BR.item, item)
-                setVariable(BR.isSelected, isSelected)
-            }
+        fun bind(item: T) {
+            binding.setVariable(BR.item, item)
 
             binding.root.setOnClickListener {
                 clickHandler.onRVListItemClick(item, adapterPosition)

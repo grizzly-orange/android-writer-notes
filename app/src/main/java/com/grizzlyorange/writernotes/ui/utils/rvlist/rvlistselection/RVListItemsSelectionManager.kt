@@ -2,9 +2,10 @@ package com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistadapter.RecyclerViewItem
 import javax.inject.Inject
 
-class RVListItemsSelectionManager<T> @Inject constructor(
+class RVListItemsSelectionManager<T: RecyclerViewItem> @Inject constructor(
     val listSelection: RVListItemsSelectionState<T>
 ) {
 

@@ -3,8 +3,9 @@ package com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
+import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistadapter.RecyclerViewItem
 
-class RVListActionModeManager<T>(
+class RVListActionModeManager<T: RecyclerViewItem>(
     private val client: RVListActionModeClient<T>
 ) : ActionMode.Callback,
     RVListItemsSelectionHandler<T> {
