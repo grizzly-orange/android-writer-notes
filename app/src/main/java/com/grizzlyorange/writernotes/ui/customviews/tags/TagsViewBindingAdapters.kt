@@ -46,7 +46,7 @@ fun setupTags(
 
 @BindingAdapter("selectedTags")
 fun setupSelectedTags(chipGroup: ChipGroup, selectedTags: List<TagDto>?) {
-    Log.d("*** Binding", "selectedTags ${selectedTags}")
+    //Log.d("*** Binding", "selectedTags ${selectedTags}")
     if (selectedTags == null) {
         return
     }

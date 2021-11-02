@@ -1,4 +1,5 @@
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -60,11 +61,11 @@ class RVListAdapter <T: RecyclerViewItem>(
 
         class ItemComparator<T: RecyclerViewItem>() : DiffUtil.ItemCallback<T>() {
             override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-                return oldItem === newItem
+                return oldItem.isItemTheSame(newItem)
             }
 
             override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-                return oldItem == newItem
+                return oldItem.isContentTheSame(newItem)
             }
         }
     }
