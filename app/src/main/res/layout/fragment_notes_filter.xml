@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.screens.notesfilter.NotesFilterFragment">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <!--data for tags view-->
+        <import type="com.grizzlyorange.writernotes.R" />
+        <variable
+            name="tagsHeader"
+            type="java.lang.String" />
+        <variable
+            name="tagsSourceAndHandler"
+            type="com.grizzlyorange.writernotes.ui.customviews.tags.TagsSourceAndHandler" />
+        <variable
+            name="tagDetailsVM"
+            type="com.grizzlyorange.writernotes.ui.screens.tagdetails.TagDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Notes filter" />
+        tools:context=".ui.screens.notesfilter.NotesFilterFragment">
 
-</FrameLayout>
+        <!-- TODO: Update blank fragment layout -->
+
+        <com.grizzlyorange.writernotes.ui.customviews.tags.TagsChoiceView
+            android:id="@+id/viewTagsAtNotesFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tagDetailsViewModel="@{tagDetailsVM}"
+            app:tagsViewHeader="@{tagsHeader}"
+            app:tagsSourceAndHandler="@{tagsSourceAndHandler}"
+            app:chipStyle="@{R.attr.FilterChipStyle}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

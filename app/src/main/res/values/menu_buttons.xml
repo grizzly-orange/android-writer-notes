@@ -5,4 +5,5 @@
     <string name="buttonDeleteNotes">Delete</string>
     <string name="buttonManageTags">Manage tags</string>
     <string name="buttonDeleteTags">Delete</string>
+    <string name="buttonApplyNotesFilter">Apply</string>
 </resources>

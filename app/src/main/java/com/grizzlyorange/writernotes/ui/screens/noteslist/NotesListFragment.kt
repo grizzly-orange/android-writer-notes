@@ -1,7 +1,6 @@
 package com.grizzlyorange.writernotes.ui.screens.noteslist
 
 import RVListAdapter
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -14,8 +13,8 @@ import com.grizzlyorange.writernotes.R
 import com.grizzlyorange.writernotes.databinding.FragmentNotesListBinding
 import com.grizzlyorange.writernotes.domain.models.Note
 import com.grizzlyorange.writernotes.ui.data.dto.NoteDto
-import com.grizzlyorange.writernotes.ui.data.dto.TagDto
 import com.grizzlyorange.writernotes.ui.screens.notedetails.NoteDetailsViewModel
+import com.grizzlyorange.writernotes.ui.screens.notesfilter.NotesFilterViewModel
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeClient
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListActionModeManager
 import com.grizzlyorange.writernotes.ui.utils.rvlist.rvlistselection.RVListItemsSelectionManager
@@ -28,8 +27,9 @@ class NotesListFragment :
     private var _binding: FragmentNotesListBinding? = null
     private val binding get() = _binding!!
 
-    private val notesVM: NotesListViewModel by viewModels()
+    private val notesVM: NotesListViewModel by activityViewModels()
     private val noteDetailsVM: NoteDetailsViewModel by activityViewModels()
+    private val notesFilterVM: NotesFilterViewModel by activityViewModels()
 
     private lateinit var actionModeManager: RVListActionModeManager<NoteDto>
 
@@ -90,7 +90,7 @@ class NotesListFragment :
         binding.rvNotesList.adapter = adapter
         binding.rvNotesList.layoutManager = LinearLayoutManager(requireContext())
 
-        notesVM.notes.observe(viewLifecycleOwner, {
+        notesVM.filteredNotes.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
     }
@@ -138,6 +138,7 @@ class NotesListFragment :
     }
 
     private fun moveToFilter() {
+        notesFilterVM.setupFilter(notesVM.filter)
         findNavController().navigate(
             R.id.action_notesListFragment_to_notesFilterFragment)
     }

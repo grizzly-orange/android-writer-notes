@@ -1,6 +1,5 @@
 package com.grizzlyorange.writernotes.ui.screens.notedetails
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -98,7 +97,7 @@ class NoteDetailsViewModel @Inject constructor(
             return false
 
         viewModelScope.launch(Dispatchers.IO) {
-            notesRep.createOrUpdateNote(note)
+            notesRep.saveNote(note)
         }
         return true
     }
