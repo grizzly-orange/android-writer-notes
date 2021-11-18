@@ -1,9 +1,6 @@
 package com.grizzlyorange.writernotes.ui.screens.notedetails
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.grizzlyorange.writernotes.data.repositories.NotesRepository
 import com.grizzlyorange.writernotes.data.repositories.TagsRepository
 import com.grizzlyorange.writernotes.domain.models.Note
@@ -14,6 +11,7 @@ import com.grizzlyorange.writernotes.ui.data.errors.ErrorsStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -47,21 +45,12 @@ class NoteDetailsViewModel @Inject constructor(
             }
         }
 
-    private val _allTags: MutableLiveData<List<TagDto>> = MutableLiveData(listOf())
-    override val allTags: LiveData<List<TagDto>> get() = _allTags
+    override val allTags: LiveData<List<TagDto>> =
+        tagsRep.getAllTagsFlow.map { tagsList ->
+            tagsList.map { tag -> TagDto(tag) }
+        }.asLiveData()
     private val _selectedTags: MutableLiveData<List<TagDto>> = MutableLiveData(listOf())
     override val selectedTags: LiveData<List<TagDto>> get() = _selectedTags
-
-    init {
-        viewModelScope.launch (Dispatchers.IO) {
-            tagsRep.getAllTagsFlow.collect { tags ->
-                _allTags.postValue(
-                    tags.map { tag ->
-                        TagDto(tag)
-                    })
-            }
-        }
-    }
 
     override fun onTagSelected(tag: Tag, isChecked: Boolean) {
 
